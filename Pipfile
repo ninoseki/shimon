@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+gunicorn = "==19.9.0"
+flask = "==1.1.1"
+mmh3 = "==2.5.1"
+pytest = "==5.2.1"
+requests = "==2.22.0"
+
+[dev-packages]
+pytest = "==5.2.1"
+pytest-cov = "==2.8.1"
+
+[requires]
+python_version = "3.7"
