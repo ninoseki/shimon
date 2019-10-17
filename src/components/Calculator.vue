@@ -11,10 +11,9 @@
       </div>
     </div>
     <div class="has-text-centered" v-if="link">
-      <img
-        src="https://www.google.com/s2/favicons?domain=shodan.io"
-        alt="shodan"
-      />
+      <span class="icon">
+        <img src="https://www.google.com/s2/favicons?domain=shodan.io" alt="shodan" />
+      </span>
       <a :href="link" target="_blank">{{ type }}:{{ hash }}</a>
     </div>
   </div>
@@ -70,9 +69,3 @@ export default class Calculator extends Vue {
   }
 }
 </script>
-
-<style scoped>
-img {
-  margin-right: 5px;
-}
-</style>
