@@ -17,11 +17,6 @@ def test_filter_type():
         "http://example.com/favicon.ico") == "http.favicon.hash"
 
 
-def test_index(client):
-    rv = client.get("/")
-    assert rv.status_code == 200
-
-
 @pytest.fixture
 def client(mocker):
     app.config["TESTING"] = True
@@ -29,11 +24,6 @@ def client(mocker):
     mocker.patch("app.mmh3_hash", return_value="foo bar")
 
     return app.test_client()
-
-
-def test_index(client):
-    resp = client.get("/")
-    assert resp.status_code == 200
 
 
 def test_hash_with_valid_inputs(client):
