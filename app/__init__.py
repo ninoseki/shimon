@@ -43,7 +43,10 @@ def index():
 
 @app.route('/hash')
 def hash():
-    url = request.args.get("url", "http://example.com/")
+    url = request.args.get("url")
+    if url is None:
+        return {"url": url, "error": "URL is not given"}, 400
+
     if not validate_url(url):
         return {"url": url, "error": "Invalid URL is given"}, 400
 
@@ -51,5 +54,13 @@ def hash():
     try:
         hash = mmh3_hash(url)
         return {"url": url, "type": type, "hash": hash}
+    except requests.exceptions.HTTPError as error:
+        return {"url": url, "error": "HTTP error"}, 400
+    except requests.exceptions.ConnectionError as error:
+        return {"url": url, "error": "Connection error"}, 400
+    except requests.exceptions.Timeout as error:
+        return {"url": url, "error": "Timeout error"}, 400
+    except requests.exceptions.RequestException as error:
+        return {"url": url, "error": "Request exception"}, 400
     except Exception as error:
         return {"url": url, "error": str(error)}, 400
