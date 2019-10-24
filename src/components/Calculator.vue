@@ -1,20 +1,16 @@
 <template>
   <div>
-    <div class="columns">
-      <div class="column is-four-fifths">
-        <b-field>
-          <b-input v-model="url"></b-input>
-        </b-field>
+    <b-field>
+      <b-input v-model="url"></b-input>
+    </b-field>
+    <div class="has-text-centered">
+      <b-button type="is-light" @click="calculate">Calculate</b-button>
+      <div v-if="link">
+        <span class="icon">
+          <img src="https://www.google.com/s2/favicons?domain=shodan.io" alt="shodan" />
+        </span>
+        <a :href="link" target="_blank">{{ type }}:{{ hash }}</a>
       </div>
-      <div class="column">
-        <b-button type="is-light" @click="calculate">Calculate</b-button>
-      </div>
-    </div>
-    <div class="has-text-centered" v-if="link">
-      <span class="icon">
-        <img src="https://www.google.com/s2/favicons?domain=shodan.io" alt="shodan" />
-      </span>
-      <a :href="link" target="_blank">{{ type }}:{{ hash }}</a>
     </div>
   </div>
 </template>
