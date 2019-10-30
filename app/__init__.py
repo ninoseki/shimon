@@ -20,7 +20,7 @@ def filter_type(url):
 
 
 def mmh3_hash(url):
-    response = requests.get(url)
+    response = requests.get(url, verify=False)
     response.raise_for_status()
 
     content_type = response.headers['Content-Type']
