@@ -24,3 +24,8 @@ selenium-debug.log
 *.sln
 *security-sgps.py
 *security_backend.py
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json

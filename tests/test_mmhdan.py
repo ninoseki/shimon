@@ -1,5 +1,6 @@
-from app import app, validate_url, filter_type
 import pytest
+
+from app import app, validate_url, filter_type
 
 
 def test_validate_url():
@@ -13,8 +14,7 @@ def test_validate_url():
 
 def test_filter_type():
     assert filter_type("http://example.com") == "http.html_hash"
-    assert filter_type(
-        "http://example.com/favicon.ico") == "http.favicon.hash"
+    assert filter_type("http://example.com/favicon.ico") == "http.favicon.hash"
 
 
 @pytest.fixture

@@ -9,12 +9,22 @@ flask = "==1.1.1"
 mmh3 = "==2.5.1"
 pytest = "==5.2.1"
 requests = "==2.22.0"
+isort = "*"
+autoflake = "*"
+flake8 = "*"
+mypy = "*"
 
 [dev-packages]
 pytest = "==5.2.1"
 pytest-cov = "==2.8.1"
 coveralls = "*"
 pytest-mock= "*"
+black = "*"
+pytest-black = "*"
+v = {editable = true,version = "*"}
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
