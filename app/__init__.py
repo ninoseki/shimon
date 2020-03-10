@@ -1,17 +1,17 @@
+from flask import Flask, request, render_template
+from urllib.parse import urlparse
 import base64
 import mmh3
-from urllib.parse import urlparse
-from flask import Flask, request, render_template
 import requests
 
 
-def validate_url(url):
+def validate_url(url) -> bool:
     valid_paths = ["", "/", "/favicon.ico"]
     url = urlparse(url)
     return url.path in valid_paths
 
 
-def filter_type(url):
+def filter_type(url) -> str:
     url = urlparse(url)
     if url.path == "/favicon.ico":
         return "http.favicon.hash"
@@ -19,11 +19,11 @@ def filter_type(url):
         return "http.html_hash"
 
 
-def mmh3_hash(url):
+def mmh3_hash(url) -> int:
     response = requests.get(url, verify=False)
     response.raise_for_status()
 
-    content_type = response.headers['Content-Type']
+    content_type = response.headers["Content-Type"]
     if "text/html" in content_type:
         return mmh3.hash(response.text)
     else:
@@ -31,17 +31,19 @@ def mmh3_hash(url):
         return mmh3.hash(b64)
 
 
-app = Flask(__name__,
-            static_folder="../dist/static",
-            template_folder="../dist")
+app = Flask(
+    __name__,
+    static_folder="../frontend/dist/static",
+    template_folder="../frontend/dist",
+)
 
 
-@app.route('/')
+@app.route("/")
 def index():
     return render_template("index.html")
 
 
-@app.route('/hash')
+@app.route("/hash")
 def hash():
     url = request.args.get("url")
     if url is None:
@@ -54,13 +56,13 @@ def hash():
     try:
         hash = mmh3_hash(url)
         return {"url": url, "type": type, "hash": hash}
-    except requests.exceptions.HTTPError as error:
+    except requests.exceptions.HTTPError:
         return {"url": url, "error": "HTTP error"}, 400
-    except requests.exceptions.ConnectionError as error:
+    except requests.exceptions.ConnectionError:
         return {"url": url, "error": "Connection error"}, 400
-    except requests.exceptions.Timeout as error:
+    except requests.exceptions.Timeout:
         return {"url": url, "error": "Timeout error"}, 400
-    except requests.exceptions.RequestException as error:
+    except requests.exceptions.RequestException:
         return {"url": url, "error": "Request exception"}, 400
     except Exception as error:
         return {"url": url, "error": str(error)}, 400
