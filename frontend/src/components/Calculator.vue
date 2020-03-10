@@ -7,9 +7,14 @@
       <b-button type="is-light" @click="calculate">Calculate</b-button>
       <div v-if="link">
         <span class="icon">
-          <img src="https://www.google.com/s2/favicons?domain=shodan.io" alt="shodan" />
+          <img
+            src="https://www.google.com/s2/favicons?domain=shodan.io"
+            alt="shodan"
+          />
         </span>
-        <a :href="link" target="_blank">{{ type }}:{{ hash }}</a>
+        <a :href="link" target="_blank"
+          >{{ response.type }}:{{ response.hash }}</a
+        >
       </div>
     </div>
   </div>
@@ -20,21 +25,13 @@ import { Component, Vue } from "vue-property-decorator";
 import axios, { AxiosError } from "axios";
 import * as qs from "qs";
 
+import { Response } from "@/types";
+
 @Component
 export default class Calculator extends Vue {
-  hash: number | undefined;
-  link: string | undefined;
-  type: string | undefined;
-  url: string | undefined;
-
-  data() {
-    return {
-      hash: undefined,
-      link: undefined,
-      type: undefined,
-      url: "https://www.google.com/favicon.ico"
-    };
-  }
+  link: string | undefined = undefined;
+  url: string | undefined = "https://www.google.com/favicon.ico";
+  response: Response | undefined = undefined;
 
   buildLink(type: string, hash: number) {
     const baseUrl = "https://shodan.io/search?";
@@ -46,16 +43,15 @@ export default class Calculator extends Vue {
 
   async calculate() {
     try {
-      const response = await axios.get("/hash", { params: { url: this.url } });
-      const data = response.data;
-      if ("hash" in data && "type" in data) {
-        this.hash = data.hash;
-        this.type = data.type;
-        this.link = this.buildLink(data.type, data.hash);
-      }
+      const response = await axios.get<Response>("/hash", {
+        params: { url: this.url }
+      });
+      this.response = response.data;
+      this.link = this.buildLink(this.response.type, this.response.hash);
+
+      this.$forceUpdate();
     } catch (error) {
       const data = error.response.data;
-      console.error(data);
       if ("error" in data) {
         alert(data.error);
       } else {
