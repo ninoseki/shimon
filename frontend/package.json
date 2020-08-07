@@ -13,14 +13,14 @@
     "axios": "0.19.2",
     "buefy": "0.8.20",
     "core-js": "3.6.4",
-    "qs": "6.9.1",
+    "qs": "6.9.4",
     "vue": "2.6.11",
     "vue-class-component": "7.2.3",
     "vue-property-decorator": "8.4.0"
   },
   "devDependencies": {
     "@types/jest": "25.2.3",
-    "@types/qs": "6.9.1",
+    "@types/qs": "6.9.4",
     "@typescript-eslint/eslint-plugin": "2.34.0",
     "@typescript-eslint/parser": "2.34.0",
     "@vue/cli-plugin-babel": "4.2.3",
