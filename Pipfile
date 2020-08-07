@@ -4,24 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-gunicorn = "==19.9.0"
 flask = "==1.1.1"
+gunicorn = "==19.9.0"
 mmh3 = "==2.5.1"
-pytest = "==5.2.1"
 requests = "==2.22.0"
-isort = "*"
-autoflake = "*"
-flake8 = "*"
-mypy = "*"
 
 [dev-packages]
-pytest = "==5.2.1"
-pytest-cov = "==2.8.1"
-coveralls = "*"
-pytest-mock= "*"
+autoflake = "*"
 black = "*"
+coveralls = "*"
+isort = "*"
+mypy = "*"
+pytest = "*"
 pytest-black = "*"
-v = {editable = true,version = "*"}
+pytest-cov = "*"
+pytest-mock= "*"
 
 [requires]
 python_version = "3.8"
