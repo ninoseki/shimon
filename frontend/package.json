@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "0.19.2",
     "buefy": "0.8.20",
-    "core-js": "3.6.4",
+    "core-js": "3.6.5",
     "qs": "6.9.4",
     "vue": "2.6.11",
     "vue-class-component": "7.2.5",
