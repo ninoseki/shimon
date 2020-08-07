@@ -16,7 +16,7 @@
     "qs": "6.9.4",
     "vue": "2.6.11",
     "vue-class-component": "7.2.5",
-    "vue-property-decorator": "8.4.0"
+    "vue-property-decorator": "8.5.1"
   },
   "devDependencies": {
     "@types/jest": "25.2.3",
