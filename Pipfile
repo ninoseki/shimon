@@ -16,7 +16,7 @@ mypy = "*"
 
 [dev-packages]
 pytest = "==5.2.1"
-pytest-cov = "==2.8.1"
+pytest-cov = "==2.10.0"
 coveralls = "*"
 pytest-mock= "*"
 black = "*"
