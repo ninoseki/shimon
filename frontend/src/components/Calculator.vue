@@ -18,7 +18,7 @@ import axios from "axios";
 import { Component, Vue } from "vue-property-decorator";
 
 import LinkList from "@/components/links/LinkList.vue";
-import { Hashes } from "@/types";
+import { ErrorData, Hashes } from "@/types";
 
 @Component({
   components: {
@@ -30,20 +30,25 @@ export default class Calculator extends Vue {
   hashes: Hashes | undefined = undefined;
 
   async calculate(): Promise<void> {
+    const loadingComponent = this.$buefy.loading.open({
+      container: this.$el,
+    });
+    this.hashes = undefined;
+
     try {
       const response = await axios.get<Hashes>("/api/hashes/calculate", {
         params: { url: this.url },
       });
       this.hashes = response.data;
-      this.$forceUpdate();
+
+      loadingComponent.close();
     } catch (error) {
-      const data = error.response.data;
-      if ("error" in data) {
-        alert(data.error);
-      } else {
-        alert(error);
-      }
+      loadingComponent.close();
+
+      const data = error.response.data as ErrorData;
+      alert(data.detail);
     }
+    this.$forceUpdate();
   }
 
   hasHashes(): boolean {
