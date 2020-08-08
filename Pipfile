@@ -4,21 +4,35 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "==1.1.1"
 gunicorn = "==20.0.4"
 mmh3 = "==2.5.1"
 requests = "==2.22.0"
+fastapi = "*"
+aiofiles = "*"
+fastapi-utils = "*"
+loguru = "*"
+uvicorn = "*"
 
 [dev-packages]
 autoflake = "*"
+autopep8 = "*"
 black = "*"
 coveralls = "*"
+flake8 = "*"
 isort = "*"
 mypy = "*"
+pipenv = "*"
+pre-commit = "*"
 pytest = "*"
 pytest-black = "*"
 pytest-cov = "*"
 pytest-mock= "*"
+pytest-randomly = "*"
+pytest-sugar = "*"
+pyupgrade = "*"
+seed-isort-config = "*"
+vcrpy = "*"
+virtualenv-clone = "*"
 
 [requires]
 python_version = "3.8"
