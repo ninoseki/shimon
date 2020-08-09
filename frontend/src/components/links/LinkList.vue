@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <BinaryEdge v-bind:hashes="hashes" />
     <hr />
     <Shodan v-bind:hashes="hashes" />
