@@ -8,6 +8,7 @@
     </div>
 
     <div class="links" v-if="hasHashes()">
+      <HashesComponent v-bind:hashes="hashes" />
       <LinkList v-bind:hashes="hashes" />
     </div>
   </div>
@@ -17,11 +18,13 @@
 import axios from "axios";
 import { Component, Vue } from "vue-property-decorator";
 
+import HashesComponent from "@/components/Hashes.vue";
 import LinkList from "@/components/links/LinkList.vue";
 import { ErrorData, Hashes } from "@/types";
 
 @Component({
   components: {
+    HashesComponent,
     LinkList,
   },
 })

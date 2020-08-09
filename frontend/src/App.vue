@@ -12,10 +12,15 @@
         <hr />
 
         <h5 class="title is-5">Note</h5>
-        <p class="content">
-          It only accepts a
-          <code>base URL</code> and <code>/favicon.ico</code> as an input.
-        </p>
+        <div class="content">
+          It accepts the following as an input.
+          <ul>
+            <li><code>Base URL</code>(e.g. http://example.com)</li>
+            <li><code>/favicon.ico</code></li>
+            <li><code>/favicon.png</code></li>
+            <li><code>/touch-icon.png</code></li>
+          </ul>
+        </div>
       </div>
     </section>
   </div>
