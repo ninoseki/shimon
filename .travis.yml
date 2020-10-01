@@ -1,11 +1,11 @@
 language: python
 python:
   - 3.8
+install:
+  - pip install poetry
+  - poetry config virtualenvs.create false
+  - poetry install
 script:
   - pytest --cov=app
-install:
-  - pip install --upgrade pip
-  - pip install pipenv
-  - pipenv install --dev
 after_success:
   - coveralls
