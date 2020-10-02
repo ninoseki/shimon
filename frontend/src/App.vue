@@ -4,8 +4,8 @@
     <section class="section is-medium">
       <div class="container">
         <h2 class="subtitle">
-          Calculate HTML/favicon hashes for searching on BinaryEdge, Shodan and
-          Spyse
+          Calculate HTML/favicon hashes for searching on BinaryEdge, Onyphe,
+          Shodan and Spyse
         </h2>
         <Calculator />
 
