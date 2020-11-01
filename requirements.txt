@@ -6,7 +6,7 @@ colorama==0.4.3; sys_platform == "win32"
 fastapi-utils==0.2.1
 fastapi==0.61.1
 gunicorn==20.0.4
-h11==0.10.0
+h11==0.11.0
 idna==2.10
 loguru==0.5.3
 mmh3==2.5.1
