@@ -7,6 +7,8 @@
     <Shodan v-bind:hashes="hashes" />
     <hr />
     <Spyse v-bind:hashes="hashes" />
+    <hr />
+    <Urlscan v-bind:hashes="hashes" />
   </div>
 </template>
 
@@ -19,6 +21,7 @@ import BinaryEdge from "./BinaryEdge.vue";
 import Onyphe from "./Onyphe.vue";
 import Shodan from "./Shodan.vue";
 import Spyse from "./Spyse.vue";
+import Urlscan from "./Urlscan.vue";
 
 @Component({
   components: {
@@ -26,6 +29,7 @@ import Spyse from "./Spyse.vue";
     Onyphe,
     Shodan,
     Spyse,
+    Urlscan,
   },
 })
 export default class LinkList extends Vue {
