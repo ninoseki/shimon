@@ -4,8 +4,7 @@
     <section class="section is-medium">
       <div class="container">
         <h2 class="subtitle">
-          Calculate HTML/favicon hashes for searching on BinaryEdge, Onyphe,
-          Shodan and Spyse
+          Calculate HTML/favicon hashes for OSINT search.
         </h2>
         <Calculator />
 
@@ -16,9 +15,12 @@
           It accepts the following as an input.
           <ul>
             <li><code>Base URL</code>(e.g. http://example.com)</li>
-            <li><code>/favicon.ico</code></li>
-            <li><code>/favicon.png</code></li>
-            <li><code>/touch-icon.png</code></li>
+            <li>
+              <code>.../favicon.ico</code>(e.g.
+              https://www.google.com/favicon.ico)
+            </li>
+            <li><code>.../favicon.png</code></li>
+            <li><code>.../touch-icon.png</code></li>
           </ul>
         </div>
       </div>
