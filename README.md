@@ -1,6 +1,6 @@
 # mmhdan
 
-[![Build Status](https://travis-ci.com/ninoseki/mmhdan.svg?branch=master)](https://travis-ci.com/ninoseki/mmhdan)
+![Python CI](https://github.com/ninoseki/mmhdan/workflows/Python%20CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/mmhdan/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mmhdan?branch=master)
 
 Calculate favicon/HTML hash values for OSINT searching.
