@@ -21,12 +21,13 @@ jobs:
           pip install poetry
           poetry config virtualenvs.create false
           poetry install
+          pip install coveralls
 
       - name: Run tests
         run: pytest --cov=app
 
       - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./.coverage
+        env:
+          COVERALLS_PARALLEL: true
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: coveralls
