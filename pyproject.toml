@@ -13,7 +13,7 @@ gunicorn = "^20.0.4"
 loguru = "^0.5.3"
 mmh3 = "^2.5.1"
 requests = "^2.25.1"
-uvicorn = {extras = ["standard"], version = "^0.12.3"}
+uvicorn = {extras = ["standard"], version = "^0.13.0"}
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"
