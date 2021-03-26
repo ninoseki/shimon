@@ -10,7 +10,7 @@ from OpenSSL import crypto
 class Certificate(APIModel):
     sha1: str
     sha256: str
-    serial: int
+    serial: str
 
     @classmethod
     def build_from_response(
@@ -26,7 +26,7 @@ class Certificate(APIModel):
 
         sha256 = cert.digest("sha256").decode().replace(":", "").lower()
         sha1 = cert.digest("sha1").decode().replace(":", "").lower()
-        serial_number = cert.get_serial_number()
+        serial_number = str(cert.get_serial_number())
 
         return cls(
             sha1=sha1,
