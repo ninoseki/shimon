@@ -4,6 +4,7 @@ import requests
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.fingerprint import Fingerprint
+from app.schemas.utils import get_response
 
 router = APIRouter()
 
@@ -23,12 +24,6 @@ def validate_url(url: str) -> bool:
         return False
 
     return True
-
-
-def get_response(url: str) -> requests.Response:
-    response = requests.get(url, verify=False)
-    response.raise_for_status()
-    return response
 
 
 @router.get(

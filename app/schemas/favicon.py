@@ -5,7 +5,13 @@ import requests
 from bs4 import BeautifulSoup
 
 from app.schemas.resource import Resource
-from app.schemas.utils import get_content_type, get_md5, get_mmh3, get_sha256
+from app.schemas.utils import (
+    get_content_type,
+    get_md5,
+    get_mmh3,
+    get_response,
+    get_sha256,
+)
 
 LINK_RELS = [
     "icon",
@@ -53,12 +59,6 @@ def get_favicon_urls(url: str, html: str):
     return icons
 
 
-def get_favicon(url: str) -> requests.Response:
-    response = requests.get(url)
-    response.raise_for_status()
-    return response
-
-
 class Favicon(Resource):
     @classmethod
     def build_from_response(cls, response: requests.Response) -> Optional["Favicon"]:
@@ -67,7 +67,7 @@ class Favicon(Resource):
             return None
 
         try:
-            favicon_response = get_favicon(urls[0])
+            favicon_response = get_response(urls[0])
             return cls(
                 content_type=get_content_type(favicon_response),
                 md5=get_md5(favicon_response),
