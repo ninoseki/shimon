@@ -1,4 +1,4 @@
-export interface Hashes {
+export interface Resource {
   contentType: string;
   md5: string;
   mmh3: number;
@@ -6,7 +6,17 @@ export interface Hashes {
   url: string;
 }
 
-export type QueryType = "html" | "favicon";
+export interface Certificate {
+  sha256: string;
+  sha1: string;
+  serial: string;
+}
+
+export interface Fingerprint {
+  html: Resource;
+  favicon: Resource | null;
+  certificate: Certificate | null;
+}
 
 export interface ErrorData {
   detail: string;

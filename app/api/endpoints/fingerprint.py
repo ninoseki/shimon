@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import requests
 from fastapi import APIRouter, HTTPException
 
-from app.schemas import Hashes
+from app.schemas.fingerprint import Fingerprint
 
 router = APIRouter()
 
@@ -11,19 +11,18 @@ router = APIRouter()
 def validate_url(url: str) -> bool:
     parsed = urlparse(url)
 
+    valid_schemes = ["http", "https"]
+    if parsed.scheme not in valid_schemes:
+        return False
+
     valid_paths = [
         "",
         "/",
     ]
-    if parsed.path in valid_paths:
-        return True
+    if parsed.path not in valid_paths:
+        return False
 
-    valid_tails = ["/favicon.ico", "/favicon.png", "/touch-icon.png"]
-    for tail in valid_tails:
-        if parsed.path.endswith(tail):
-            return True
-
-    return False
+    return True
 
 
 def get_response(url: str) -> requests.Response:
@@ -34,10 +33,10 @@ def get_response(url: str) -> requests.Response:
 
 @router.get(
     "/calculate",
-    response_model=Hashes,
-    response_description="Hashes of an HTML or favicon",
-    summary="Get hashes of an HTML or favicon",
-    description="Returns hashes of an HTML or favicion",
+    response_model=Fingerprint,
+    response_description="Fingerprint of a website",
+    summary="Get a fingerprint of an HTML or favicon",
+    description="Returns a fingerprint of a website",
 )
 def calculate(url: str):
     if not validate_url(url):
@@ -48,4 +47,4 @@ def calculate(url: str):
     except requests.HTTPError as e:
         raise HTTPException(status_code=500, detail=f"Cannot get {url}: {e}")
 
-    return Hashes.build_from_response(response)
+    return Fingerprint.build_from_response(response)

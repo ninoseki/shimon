@@ -11,30 +11,25 @@ repos:
           ]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.7.4
+    rev: v2.11.0
     hooks:
       - id: pyupgrade
         args: [--py37-plus]
 
-  - repo: https://github.com/asottile/seed-isort-config
-    rev: v2.2.0
-    hooks:
-      - id: seed-isort-config
-
   - repo: https://github.com/timothycrosley/isort
-    rev: 5.7.0
+    rev: 5.8.0
     hooks:
       - id: isort
         additional_dependencies: [toml]
         exclude: ^.*/?setup\.py$
 
   - repo: https://github.com/psf/black
-    rev: stable
+    rev: 20.8b1
     hooks:
       - id: black
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v7.16.0
+    rev: v7.22.0
     hooks:
       - id: eslint
         files: \.(ts|vue)$
