@@ -9,9 +9,9 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.24.0
+      - python-requests/2.25.1
     method: GET
-    uri: http://example.com/favicon.ico
+    uri: https://example.com/
   response:
     body:
       string: !!binary |
@@ -31,7 +31,7 @@ interactions:
       Accept-Ranges:
       - bytes
       Age:
-      - '165942'
+      - '481645'
       Cache-Control:
       - max-age=604800
       Content-Encoding:
@@ -41,18 +41,20 @@ interactions:
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Sat, 08 Aug 2020 03:06:14 GMT
+      - Fri, 26 Mar 2021 06:33:10 GMT
+      Etag:
+      - '"3147526947+gzip"'
       Expires:
-      - Sat, 15 Aug 2020 03:06:14 GMT
+      - Fri, 02 Apr 2021 06:33:10 GMT
       Last-Modified:
-      - Thu, 06 Aug 2020 05:00:32 GMT
+      - Thu, 17 Oct 2019 07:18:26 GMT
       Server:
-      - ECS (sec/97A6)
+      - ECS (sec/973B)
       Vary:
       - Accept-Encoding
       X-Cache:
-      - 404-HIT
+      - HIT
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
 version: 1

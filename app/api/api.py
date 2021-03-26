@@ -1,6 +1,8 @@
 from fastapi import APIRouter
 
-from app.api.endpoints import hashes
+from app.api.endpoints import fingerprint
 
 api_router = APIRouter()
-api_router.include_router(hashes.router, prefix="/hashes", tags=["hashes"])
+api_router.include_router(
+    fingerprint.router, prefix="/fingerprint", tags=["fingerprint"]
+)

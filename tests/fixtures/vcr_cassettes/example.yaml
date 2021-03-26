@@ -9,13 +9,13 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.24.0
+      - python-requests/2.25.1
     method: GET
     uri: http://example.com/
   response:
     body:
       string: !!binary |
-        H4sIAMIVqF0AA31UTXPbIBC9+1ds1UsyIyQnaRqPLWn6mWkPaQ9pDz0SsbKYCFAByfZ08t+7Qo4j
+        H4sIAAAAAAAA/31UTXPbIBC9+1ds1UsyIyQnaRqPLWn6mWkPaQ9pDz0SsbKYCFAByfZ08t+7Qo4j
         N5makYFdeLvvsZC9Eqb0uxah9qopZtljh1wUM6Bf5qVvsPi85aptED4ZxaXO0tE6G5co9BzKmluH
         Po86X7FFBGkxcdbetwx/d7LPo49Ge9SeDWEjKMdZHnnc+nQIvzpAvYSkucI86iVuWmP9ZP9GCl/n
         AntZIguTGKSWXvKGuZI3mJ89QTm/IzJDBvvApXPR6LszYgd/wjBMeXm/tqbTgpWmMXYJr6s5tfPV
@@ -28,8 +28,10 @@ interactions:
         3VOFhOgtWiWdI0eSpe0hz4weCItVHg3PhFum6WazSSTXPDF2nY4hXbpPMypujB1IEKAKQZKE0HgR
         ELM0iJOle6nS8UH7CyjrfG/oBAAA
     headers:
+      Accept-Ranges:
+      - bytes
       Age:
-      - '389049'
+      - '516165'
       Cache-Control:
       - max-age=604800
       Content-Encoding:
@@ -39,15 +41,15 @@ interactions:
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Sat, 08 Aug 2020 03:06:15 GMT
+      - Fri, 26 Mar 2021 06:22:48 GMT
       Etag:
-      - '"3147526947+gzip"'
+      - '"3147526947"'
       Expires:
-      - Sat, 15 Aug 2020 03:06:15 GMT
+      - Fri, 02 Apr 2021 06:22:48 GMT
       Last-Modified:
       - Thu, 17 Oct 2019 07:18:26 GMT
       Server:
-      - ECS (sec/9795)
+      - ECS (sec/9739)
       Vary:
       - Accept-Encoding
       X-Cache:
