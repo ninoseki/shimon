@@ -5,6 +5,12 @@ import mmh3
 import requests
 
 
+def get_response(url: str) -> requests.Response:
+    response = requests.get(url, verify=False)
+    response.raise_for_status()
+    return response
+
+
 def get_content_type(response: requests.Response) -> str:
     return response.headers.get("Content-Type", "")
 
