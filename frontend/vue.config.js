@@ -1,16 +1,18 @@
+const target = process.env.BACKEND_URL || "http://localhost:8000/";
+
 module.exports = {
   outputDir: "dist",
   assetsDir: "static",
   devServer: {
     proxy: {
-      "/hash": {
-        target: "http://localhost:8000/",
+      "/api/*": {
+        target,
       },
       "/docs": {
-        target: "http://localhost:8000/",
+        target,
       },
       "/openapi.json": {
-        target: "http://localhost:8000/",
+        target,
       },
     },
   },

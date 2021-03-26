@@ -1,46 +1,28 @@
 <template>
   <div id="app">
-    <Navbar />
+    <Navbar></Navbar>
     <section class="section is-medium">
       <div class="container">
         <h2 class="subtitle">
-          Calculate HTML/favicon hashes for OSINT search.
+          Calculate a fingerprint of a website for OSINT search.
         </h2>
-        <Calculator />
-
-        <hr />
-
-        <h5 class="title is-5">Note</h5>
-        <div class="content">
-          It accepts the following as an input.
-          <ul>
-            <li><code>Base URL</code>(e.g. http://example.com)</li>
-            <li>
-              <code>.../favicon.ico</code>(e.g.
-              https://www.google.com/favicon.ico)
-            </li>
-            <li><code>.../favicon.png</code></li>
-            <li><code>.../touch-icon.png</code></li>
-          </ul>
-        </div>
+        <Calculator></Calculator>
       </div>
     </section>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { defineComponent } from "vue";
 
-import Calculator from "./components/Calculator.vue";
-import Navbar from "./components/Navbar.vue";
+import Calculator from "@/components/Calculator.vue";
+import Navbar from "@/components/Navbar.vue";
 
-@Component({
+export default defineComponent({
+  name: "App",
   components: {
-    Calculator,
     Navbar,
+    Calculator,
   },
-})
-export default class App extends Vue {}
+});
 </script>
-
-<style scoped></style>
