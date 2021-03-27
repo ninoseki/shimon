@@ -1,5 +1,5 @@
 from typing import List, Optional
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlunparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -25,7 +25,12 @@ def is_absolute(url: str):
     return bool(urlparse(url).netloc)
 
 
-def get_favicon_urls(url: str, html: str):
+def get_default_favicon_url(url: str) -> str:
+    parsed = urlparse(url)
+    return urlunparse((parsed.scheme, parsed.netloc, "favicon.ico", "", "", ""))
+
+
+def get_favicon_urls_from_html(url: str, html: str) -> List[str]:
     soup = BeautifulSoup(html, features="html.parser")
 
     link_tags = set()
@@ -62,20 +67,20 @@ def get_favicon_urls(url: str, html: str):
 class Favicon(Resource):
     @classmethod
     def build_from_response(cls, response: requests.Response) -> Optional["Favicon"]:
-        urls = get_favicon_urls(response.url, response.text)
-        if len(urls) == 0:
-            return None
+        favicon_urls = get_favicon_urls_from_html(response.url, response.text)
+        favicon_urls.append(get_default_favicon_url(response.url))
 
-        try:
-            favicon_response = get_response(urls[0])
-            return cls(
-                content_type=get_content_type(favicon_response),
-                md5=get_md5(favicon_response),
-                mmh3=get_mmh3(favicon_response),
-                sha256=get_sha256(favicon_response),
-                url=favicon_response.url,
-            )
-        except requests.HTTPError:
-            pass
+        for url in favicon_urls:
+            try:
+                favicon_response = get_response(url)
+                return cls(
+                    content_type=get_content_type(favicon_response),
+                    md5=get_md5(favicon_response),
+                    mmh3=get_mmh3(favicon_response),
+                    sha256=get_sha256(favicon_response),
+                    url=favicon_response.url,
+                )
+            except requests.HTTPError:
+                pass
 
         return None
