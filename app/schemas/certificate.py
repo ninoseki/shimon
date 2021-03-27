@@ -1,5 +1,6 @@
+import socket
 import ssl
-from typing import Optional
+from typing import Optional, cast
 from urllib.parse import urlparse
 
 import requests
@@ -20,9 +21,15 @@ class Certificate(APIModel):
             return None
 
         parsed = urlparse(response.url)
+        hostname = parsed.netloc
+        port = 443
 
-        cert_pem = ssl.get_server_certificate((parsed.netloc, 443))
-        cert: crypto.X509 = crypto.load_certificate(crypto.FILETYPE_PEM, cert_pem)
+        context = ssl.create_default_context()
+        connection = socket.create_connection((hostname, port))
+        ssl_socket = context.wrap_socket(connection, server_hostname=hostname)
+        peer_cert = cast(bytes, ssl_socket.getpeercert(True))
+        pem_cert = ssl.DER_cert_to_PEM_cert(peer_cert)
+        cert: crypto.X509 = crypto.load_certificate(crypto.FILETYPE_PEM, pem_cert)
 
         sha256 = cert.digest("sha256").decode().replace(":", "").lower()
         sha1 = cert.digest("sha1").decode().replace(":", "").lower()
