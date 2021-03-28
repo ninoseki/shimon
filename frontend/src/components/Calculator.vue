@@ -14,18 +14,11 @@
     <hr />
 
     <div v-if="calculateTask.isRunning">
-      <div class="has-text-centered">
-        <div class="fa-3x">
-          <i class="fas fa-spinner fa-spin"></i>
-        </div>
-      </div>
+      <Loading></Loading>
     </div>
 
-    <div
-      class="notification is-warning"
-      v-else-if="calculateTask.isError && calculateTask.last"
-    >
-      <p>{{ calculateTask.last.error.response.data.detail }}</p>
+    <div v-else-if="calculateTask.isError && calculateTask.last">
+      <ErrorMessage :error="getErrorData()"></ErrorMessage>
     </div>
 
     <div v-else>
@@ -52,21 +45,25 @@ import { defineComponent, ref } from "vue";
 import { useAsyncTask } from "vue-concurrency";
 
 import { API } from "@/api";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 import FingerprintComponent from "@/components/Fingerprint.vue";
+import Loading from "@/components/Loading.vue";
 import BinaryEdge from "@/components/services/BinaryEdge.vue";
 import Censys from "@/components/services/Censys.vue";
 import Onyphe from "@/components/services/Onyphe.vue";
 import Shodan from "@/components/services/Shodan.vue";
 import Spyse from "@/components/services/Spyse.vue";
 import Urlscan from "@/components/services/Urlscan.vue";
-import { Fingerprint } from "@/types";
+import { ErrorData, Fingerprint } from "@/types";
 
 export default defineComponent({
   name: "Calculator",
   components: {
     BinaryEdge,
     Censys,
+    ErrorMessage,
     FingerprintComponent,
+    Loading,
     Onyphe,
     Shodan,
     Spyse,
@@ -87,14 +84,16 @@ export default defineComponent({
       await calculateTask.perform();
     };
 
-    return { url, calculate, calculateTask };
+    const getErrorData = (): ErrorData | undefined => {
+      if (calculateTask.isError && calculateTask.last) {
+        const data = calculateTask.last.error.response.data as ErrorData;
+        return data;
+      }
+
+      return undefined;
+    };
+
+    return { url, calculate, calculateTask, getErrorData };
   },
 });
 </script>
-
-<style scoped>
-.links {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-</style>

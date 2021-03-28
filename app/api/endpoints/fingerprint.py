@@ -39,7 +39,10 @@ def calculate(url: str):
 
     try:
         response = get_response(url)
-    except requests.HTTPError as e:
+    except (requests.HTTPError, requests.ConnectionError) as e:
         raise HTTPException(status_code=500, detail=f"Cannot get {url}: {e}")
 
-    return Fingerprint.build_from_response(response)
+    try:
+        return Fingerprint.build_from_response(response)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
