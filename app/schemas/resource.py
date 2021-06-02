@@ -5,5 +5,6 @@ class Resource(APIModel):
     content_type: str
     md5: str
     mmh3: int
+    sha1: str
     sha256: str
     url: str
