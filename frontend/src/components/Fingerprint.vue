@@ -7,6 +7,7 @@
           <li><strong>URL:</strong> {{ fingerprint.html.url }}</li>
           <li><strong>MMH3:</strong> {{ fingerprint.html.mmh3 }}</li>
           <li><strong>MD5:</strong> {{ fingerprint.html.md5 }}</li>
+          <li><strong>SHA1:</strong> {{ fingerprint.html.sha1 }}</li>
           <li><strong>SHA256:</strong> {{ fingerprint.html.sha256 }}</li>
         </ul>
       </div>
@@ -19,6 +20,9 @@
             <strong>MMH3:</strong> {{ fingerprint.favicon?.mmh3 || "N/A" }}
           </li>
           <li><strong>MD5:</strong> {{ fingerprint.favicon?.md5 || "N/A" }}</li>
+          <li>
+            <strong>SHA1:</strong> {{ fingerprint.favicon?.sha1 || "N/A" }}
+          </li>
           <li>
             <strong>SHA256:</strong> {{ fingerprint.favicon?.sha256 || "N/A" }}
           </li>

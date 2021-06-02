@@ -10,6 +10,7 @@ from app.schemas.utils import (
     get_md5,
     get_mmh3,
     get_response,
+    get_sha1,
     get_sha256,
 )
 
@@ -77,6 +78,7 @@ class Favicon(Resource):
                     content_type=get_content_type(favicon_response),
                     md5=get_md5(favicon_response),
                     mmh3=get_mmh3(favicon_response),
+                    sha1=get_sha1(favicon_response),
                     sha256=get_sha256(favicon_response),
                     url=favicon_response.url,
                 )

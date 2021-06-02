@@ -39,15 +39,18 @@ export default defineComponent({
   },
   setup(props) {
     const createLink = (q: string): string => {
-      const baseUrl = "https://censys.io/ipv4?";
+      const baseUrl = "https://search.censys.io/search?";
+      const resource = "hosts";
       const params = {
         q,
+        resource,
       };
       return baseUrl + qs.stringify(params);
     };
 
     const htmlLink = computed(() => {
-      return createLink(props.fingerprint.html.sha256);
+      const q = `services.http.response.body_hash:"sha1:${props.fingerprint.html.sha1}"`;
+      return createLink(q);
     });
 
     const certificateLink = computed(() => {

@@ -30,3 +30,7 @@ def get_md5(response: requests.Response) -> str:
 
 def get_sha256(response: requests.Response) -> str:
     return hashlib.sha256(response.content).hexdigest()
+
+
+def get_sha1(response: requests.Response) -> str:
+    return hashlib.sha1(response.content).hexdigest()

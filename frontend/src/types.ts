@@ -2,6 +2,7 @@ export interface Resource {
   contentType: string;
   md5: string;
   mmh3: number;
+  sha1: string;
   sha256: string;
   url: string;
 }
