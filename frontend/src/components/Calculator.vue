@@ -2,7 +2,13 @@
   <div>
     <div class="field">
       <div class="control is-clearfix">
-        <input type="url" autocomplete="on" class="input" v-model="url" />
+        <input
+          type="url"
+          autocomplete="on"
+          class="input"
+          placeholder="http://example.com"
+          v-model="url"
+        />
       </div>
     </div>
     <div class="has-text-centered">
