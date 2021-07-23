@@ -33,7 +33,7 @@ def validate_url(url: str) -> bool:
     summary="Get a fingerprint of an HTML or favicon",
     description="Returns a fingerprint of a website",
 )
-def calculate(url: str):
+async def calculate(url: str):
     if not validate_url(url):
         raise HTTPException(status_code=400, detail=f"{url} is not a valid URL")
 
@@ -43,6 +43,6 @@ def calculate(url: str):
         raise HTTPException(status_code=500, detail=f"Cannot get {url}: {e}")
 
     try:
-        return Fingerprint.build_from_response(response)
+        return await Fingerprint.build_from_response(response)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
