@@ -13,8 +13,30 @@ export interface Certificate {
   serial: string;
 }
 
+export interface A {
+  host: string;
+  ttl: number;
+}
+
+export interface CNAME {
+  cnmae: string;
+  ttl: number;
+}
+
+export interface TXT {
+  text: string;
+  ttl: number;
+}
+export interface DNS {
+  a: A[] | null;
+  aaaa: A[] | null;
+  cname: CNAME[] | null;
+  txt: TXT[] | null;
+}
+
 export interface Fingerprint {
   html: Resource;
+  dns: DNS;
   favicon: Resource | null;
   certificate: Certificate | null;
 }

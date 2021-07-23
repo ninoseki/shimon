@@ -13,6 +13,51 @@
       </div>
 
       <div class="mt-4 mb-4">
+        <h4 class="is-size-4">DNS</h4>
+        <ul>
+          <li>
+            <strong>A:</strong>
+            <span v-if="fingerprint.dns.a">
+              {{
+                " " + fingerprint.dns.a.map((record) => record.host).join(", ")
+              }}
+            </span>
+            <span v-else> N/A</span>
+          </li>
+          <li>
+            <strong>AAAA:</strong>
+            <span v-if="fingerprint.dns.aaaa">
+              {{
+                " " +
+                fingerprint.dns.aaaa.map((record) => record.host).join(", ")
+              }}
+            </span>
+            <span v-else> N/A</span>
+          </li>
+          <li>
+            <strong>CNAME:</strong>
+            <span v-if="fingerprint.dns.cname">
+              {{
+                " " +
+                fingerprint.dns.cname.map((record) => record.cnmae).join(", ")
+              }}
+            </span>
+            <span v-else> N/A</span>
+          </li>
+          <li>
+            <strong>TXT:</strong>
+            <span v-if="fingerprint.dns.txt">
+              {{
+                " " +
+                fingerprint.dns.txt.map((record) => record.text).join(", ")
+              }}
+            </span>
+            <span v-else> N/A</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-4 mb-4">
         <h4 class="is-size-4">Favicon</h4>
         <ul>
           <li><strong>URL:</strong> {{ fingerprint.favicon?.url || "N/A" }}</li>

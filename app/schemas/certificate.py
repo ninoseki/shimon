@@ -1,9 +1,9 @@
 import socket
 import ssl
 from typing import Optional, cast
-from urllib.parse import urlparse
 
 import requests
+from d8s_urls import url_domain
 from fastapi_utils.api_model import APIModel
 from OpenSSL import crypto
 
@@ -20,8 +20,7 @@ class Certificate(APIModel):
         if not response.url.startswith("https://"):
             return None
 
-        parsed = urlparse(response.url)
-        hostname = parsed.netloc
+        hostname = url_domain(response.url)
         port = 443
 
         context = ssl.create_default_context()
