@@ -13,10 +13,16 @@
         </h4>
 
         <ul>
+          <li v-for="link in aLinks" :key="link.key">
+            <a :href="link.link">{{ link.key }}</a>
+          </li>
+
           <li><a :href="htmlLink">HTML</a></li>
+
           <li v-if="faviconLink">
             <a :href="faviconLink">Favicon</a>
           </li>
+
           <li v-if="certificateLink">
             <a :href="certificateLink">Certificate</a>
           </li>
