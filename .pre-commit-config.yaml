@@ -10,6 +10,13 @@ repos:
             "--remove-unused-variable",
           ]
 
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+        additional_dependencies: [flake8-print]
+        args: ["--ignore=E501,W503"]
+
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.21.2
     hooks:
