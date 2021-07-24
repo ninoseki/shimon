@@ -34,9 +34,15 @@ export interface DNS {
   txt: TXT[] | null;
 }
 
+export interface Tracker {
+  googleAdsenseId: string | null;
+  googleAnalyticsId: string | null;
+}
+
 export interface Fingerprint {
   html: Resource;
   dns: DNS;
+  tracker: Tracker;
   favicon: Resource | null;
   certificate: Certificate | null;
 }

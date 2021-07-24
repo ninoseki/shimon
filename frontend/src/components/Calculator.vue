@@ -40,6 +40,11 @@
           <Shodan :fingerprint="calculateTask.last.value"></Shodan>
           <Spyse :fingerprint="calculateTask.last.value"></Spyse>
           <Urlscan :fingerprint="calculateTask.last.value"></Urlscan>
+          <VirusTotal :fingerprint="calculateTask.last.value"></VirusTotal>
+          <SecurityTrails
+            :fingerprint="calculateTask.last.value"
+          ></SecurityTrails>
+          <SpyOnWeb :fingerprint="calculateTask.last.value"></SpyOnWeb>
         </div>
       </div>
     </div>
@@ -57,9 +62,12 @@ import Loading from "@/components/Loading.vue";
 import BinaryEdge from "@/components/services/BinaryEdge.vue";
 import Censys from "@/components/services/Censys.vue";
 import Onyphe from "@/components/services/Onyphe.vue";
+import SecurityTrails from "@/components/services/SecurityTrails.vue";
 import Shodan from "@/components/services/Shodan.vue";
+import SpyOnWeb from "@/components/services/SpyOnWeb.vue";
 import Spyse from "@/components/services/Spyse.vue";
 import Urlscan from "@/components/services/Urlscan.vue";
+import VirusTotal from "@/components/services/VirusTotal.vue";
 import { ErrorData, Fingerprint } from "@/types";
 
 export default defineComponent({
@@ -74,9 +82,12 @@ export default defineComponent({
     Shodan,
     Spyse,
     Urlscan,
+    VirusTotal,
+    SecurityTrails,
+    SpyOnWeb,
   },
   setup() {
-    const url = ref<string | undefined>(undefined);
+    const url = ref<string>("https://example.com");
 
     const calculateTask = useAsyncTask<Fingerprint, []>(async () => {
       return await API.calculateFingerprint(url.value || "");

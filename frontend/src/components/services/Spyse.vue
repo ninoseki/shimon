@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-half">
+  <div class="column is-half" v-if="hasLinks">
     <div class="box">
       <div class="content is-normal">
         <h4 class="is-size-4">
@@ -80,7 +80,14 @@ export default defineComponent({
       return createLink(JSON.stringify(params));
     });
 
-    return { faviconLink, certificateLink };
+    const hasLinks = computed(() => {
+      return (
+        props.fingerprint.favicon !== null ||
+        props.fingerprint.certificate !== null
+      );
+    });
+
+    return { faviconLink, certificateLink, hasLinks };
   },
 });
 </script>
