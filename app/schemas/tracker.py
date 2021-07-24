@@ -18,8 +18,6 @@ class Tracker(APIModel):
         if len(adsense_ids) == 1:
             adsense_id = adsense_ids[0]
 
-        print(adsense_ids)
-
         analytics_id: Optional[str] = None
         analytics_ids = parse_google_analytics_ids(html)
         if len(analytics_ids) == 1:
