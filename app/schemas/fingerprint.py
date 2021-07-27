@@ -8,12 +8,14 @@ from app.schemas.dns import DNS
 from app.schemas.favicon import Favicon
 from app.schemas.html import HTML
 from app.schemas.tracker import Tracker
+from app.schemas.whois import Whois
 
 
 class Fingerprint(APIModel):
     html: HTML
     dns: DNS
     tracker: Tracker
+    whois: Whois
 
     favicon: Optional[Favicon]
     certificate: Optional[Certificate]
@@ -23,6 +25,7 @@ class Fingerprint(APIModel):
         html = HTML.build_from_response(response)
         dns = await DNS.build_from_response(response)
         tracker = Tracker.build_from_response(response)
+        whois = await Whois.build_from_response(response)
 
         favicon = Favicon.build_from_response(response)
         certificate = Certificate.build_from_response(response)
@@ -33,4 +36,5 @@ class Fingerprint(APIModel):
             favicon=favicon,
             dns=dns,
             tracker=tracker,
+            whois=whois,
         )

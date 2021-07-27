@@ -8,17 +8,20 @@ authors = ["Manabu Niseki <manabu.niseki@gmail.com>"]
 python = "^3.8"
 aiodns = "^3.0.0"
 aiofiles = "^0.7.0"
+asyncwhois = "^0.3.2"
 beautifulsoup4 = "^4.9.3"
 d8s-urls = "^0.6.0"
 fastapi = "^0.67.0"
 fastapi-utils = "^0.2.1"
 gunicorn = "^20.1.0"
+ioc-finder = "^6.0.1"
 loguru = "^0.5.3"
 mmh3 = "^3.0.0"
 pyOpenSSL = "^20.0.1"
 requests = {extras = ["security"], version = "^2.26.0"}
+tldextract = "^3.1.0"
 uvicorn = {extras = ["standard"], version = "^0.14.0"}
-ioc-finder = "^6.0.1"
+whois-parser = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"
