@@ -45,6 +45,10 @@
             :fingerprint="calculateTask.last.value"
           ></SecurityTrails>
           <SpyOnWeb :fingerprint="calculateTask.last.value"></SpyOnWeb>
+          <DomainBigData
+            :fingerprint="calculateTask.last.value"
+          ></DomainBigData>
+          <DomainWatch :fingerprint="calculateTask.last.value"></DomainWatch>
         </div>
       </div>
     </div>
@@ -61,6 +65,8 @@ import FingerprintComponent from "@/components/Fingerprint.vue";
 import Loading from "@/components/Loading.vue";
 import BinaryEdge from "@/components/services/BinaryEdge.vue";
 import Censys from "@/components/services/Censys.vue";
+import DomainBigData from "@/components/services/DomainBigData.vue";
+import DomainWatch from "@/components/services/DomainWatch.vue";
 import Onyphe from "@/components/services/Onyphe.vue";
 import SecurityTrails from "@/components/services/SecurityTrails.vue";
 import Shodan from "@/components/services/Shodan.vue";
@@ -85,6 +91,8 @@ export default defineComponent({
     VirusTotal,
     SecurityTrails,
     SpyOnWeb,
+    DomainWatch,
+    DomainBigData,
   },
   setup() {
     const url = ref<string>("https://example.com");

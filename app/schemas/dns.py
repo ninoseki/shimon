@@ -37,6 +37,10 @@ async def query(name: str, query_type: QUERY_TYPES):
     try:
         resolver = aiodns.DNSResolver()
         records = await resolver.query(name, query_type)
+
+        if not isinstance(records, list):
+            records = [records]
+
         return cast(List[Any], records)
     except aiodns.error.DNSError:
         return None

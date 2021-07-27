@@ -39,10 +39,18 @@ export interface Tracker {
   googleAnalyticsId: string | null;
 }
 
+export interface Whois {
+  registrantEmail: string | null;
+  registrantName: string | null;
+  registrantOrganization: string | null;
+  registrar: string | null;
+}
+
 export interface Fingerprint {
   html: Resource;
   dns: DNS;
   tracker: Tracker;
+  whois: Whois;
   favicon: Resource | null;
   certificate: Certificate | null;
 }

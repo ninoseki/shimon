@@ -50,6 +50,28 @@
       </div>
 
       <div class="mt-4 mb-4">
+        <h4 class="is-size-4">Whois</h4>
+        <table class="table">
+          <tr>
+            <th>Registrar</th>
+            <td>{{ fingerprint.whois.registrar || "N/A" }}</td>
+          </tr>
+          <tr>
+            <th>Registrant organization</th>
+            <td>{{ fingerprint.whois.registrantOrganization || "N/A" }}</td>
+          </tr>
+          <tr>
+            <th>Registrant name</th>
+            <td>{{ fingerprint.whois.registrantName || "N/A" }}</td>
+          </tr>
+          <tr>
+            <th>Registrant email</th>
+            <td>{{ fingerprint.whois.registrantEmail || "N/A" }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="mt-4 mb-4">
         <h4 class="is-size-4">HTML</h4>
         <table class="table">
           <tr>
@@ -153,7 +175,15 @@ export default defineComponent({
 </script>
 
 <style scoped>
+table.table {
+  table-layout: fixed;
+}
+
 table.table th {
   width: 240px;
+}
+
+table.table td {
+  word-wrap: break-word;
 }
 </style>
