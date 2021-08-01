@@ -30,7 +30,7 @@
     "@vue/compiler-sfc": "3.1.5",
     "@vue/eslint-config-prettier": "6.0.0",
     "@vue/eslint-config-typescript": "7.0.0",
-    "@vue/test-utils": "2.0.0-rc.9",
+    "@vue/test-utils": "2.0.0-rc.12",
     "eslint": "6.8.0",
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
