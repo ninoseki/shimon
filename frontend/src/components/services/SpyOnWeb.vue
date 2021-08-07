@@ -14,7 +14,7 @@
 
         <ul>
           <li>
-            <a :href="link">Google Analytics ID</a>
+            <a target="_blank" :href="link">Google Analytics ID</a>
           </li>
         </ul>
       </div>

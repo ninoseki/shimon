@@ -14,13 +14,13 @@
 
         <ul>
           <li>
-            <a :href="htmlLink">HTML</a>
+            <a target="_blank" :href="htmlLink">HTML</a>
           </li>
           <li v-if="faviconLink">
-            <a :href="faviconLink">Favicon</a>
+            <a target="_blank" :href="faviconLink">Favicon</a>
           </li>
           <li v-if="certificateLink">
-            <a :href="certificateLink">Certificate</a>
+            <a target="_blank" :href="certificateLink">Certificate</a>
           </li>
         </ul>
       </div>

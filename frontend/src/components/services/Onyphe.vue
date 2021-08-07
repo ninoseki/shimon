@@ -14,7 +14,7 @@
 
         <ul>
           <li>
-            <a :href="htmlLink">HTML</a>
+            <a target="_blank" :href="htmlLink">HTML</a>
           </li>
         </ul>
       </div>

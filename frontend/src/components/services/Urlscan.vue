@@ -13,9 +13,9 @@
         </h4>
 
         <ul>
-          <li><a :href="htmlLink">HTML</a></li>
+          <li><a target="_blank" :href="htmlLink">HTML</a></li>
           <li v-if="faviconLink">
-            <a :href="faviconLink">Favicon</a>
+            <a target="_blank" :href="faviconLink">Favicon</a>
           </li>
         </ul>
       </div>
