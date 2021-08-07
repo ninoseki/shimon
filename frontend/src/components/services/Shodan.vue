@@ -14,17 +14,17 @@
 
         <ul>
           <li v-for="link in aLinks" :key="link.key">
-            <a :href="link.link">{{ link.key }}</a>
+            <a target="_blank" :href="link.link">{{ link.key }}</a>
           </li>
 
-          <li><a :href="htmlLink">HTML</a></li>
+          <li><a target="_blank" :href="htmlLink">HTML</a></li>
 
           <li v-if="faviconLink">
-            <a :href="faviconLink">Favicon</a>
+            <a target="_blank" :href="faviconLink">Favicon</a>
           </li>
 
           <li v-if="certificateLink">
-            <a :href="certificateLink">Certificate</a>
+            <a target="_blank" :href="certificateLink">Certificate</a>
           </li>
         </ul>
       </div>

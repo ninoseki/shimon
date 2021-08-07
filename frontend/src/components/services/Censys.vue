@@ -13,9 +13,9 @@
         </h4>
 
         <ul>
-          <li><a :href="htmlLink">HTML</a></li>
+          <li><a target="_blank" :href="htmlLink">HTML</a></li>
           <li v-if="certificateLink">
-            <a :href="certificateLink">Certificate</a>
+            <a target="_blank" :href="certificateLink">Certificate</a>
           </li>
         </ul>
       </div>

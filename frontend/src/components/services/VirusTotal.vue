@@ -14,7 +14,7 @@
 
         <ul>
           <li v-for="link in aLinks" :key="link.key">
-            <a :href="link.link">{{ link.key }}</a>
+            <a target="_blank" :href="link.link">{{ link.key }}</a>
           </li>
         </ul>
       </div>

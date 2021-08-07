@@ -14,7 +14,7 @@
 
         <ul>
           <li>
-            <a :href="link">Registrant email</a>
+            <a target="_blank" :href="link">Registrant email</a>
           </li>
         </ul>
       </div>
