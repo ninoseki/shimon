@@ -22,6 +22,10 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
 
+      - name: Install
+        run: |
+          poetry install
+
       - name: Run tests
         run: poetry run pytest --cov=app
 
