@@ -19,6 +19,9 @@
           <li v-if="certificateLink">
             <a target="_blank" :href="certificateLink">Certificate</a>
           </li>
+          <li v-for="link in aLinks" :key="link.key">
+            <a target="_blank" :href="link.link">{{ link.key }}</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -80,14 +83,35 @@ export default defineComponent({
       return createLink(JSON.stringify(params));
     });
 
+    const aLinks = computed(() => {
+      if (props.fingerprint.dns.a === null) {
+        return undefined;
+      }
+
+      return (props.fingerprint.dns.a || []).map((record) => {
+        const params = [
+          {
+            dns_a: {
+              value: record.host,
+              operator: "eq",
+            },
+          },
+        ];
+        return {
+          key: record.host, link: createLink(JSON.stringify(params))
+        };
+      });
+    });
+
     const hasLinks = computed(() => {
       return (
-        props.fingerprint.favicon !== null ||
-        props.fingerprint.certificate !== null
+          props.fingerprint.favicon !== null ||
+          props.fingerprint.certificate !== null ||
+          props.fingerprint.dns.a || null
       );
     });
 
-    return { faviconLink, certificateLink, hasLinks };
+    return { faviconLink, certificateLink, hasLinks, aLinks };
   },
 });
 </script>
