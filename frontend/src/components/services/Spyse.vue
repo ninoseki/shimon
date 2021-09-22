@@ -41,7 +41,7 @@ export default defineComponent({
   },
   setup(props) {
     const createLink = (search_params: string): string => {
-      const baseUrl = "https://spyse.com/advanced-search/domain?";
+      const baseUrl = "https://spyse.com/search?target=domain&";
       const params = {
         search_params,
       };
@@ -55,7 +55,7 @@ export default defineComponent({
 
       const params = [
         {
-          domain_info_favicon_hash: {
+          http_extract_favicon_sha256: {
             value: props.fingerprint.favicon.sha256,
             operator: "eq",
           },
@@ -71,7 +71,7 @@ export default defineComponent({
 
       const params = [
         {
-          cert_fingerprint_sha256: {
+          certificate_sha256: {
             value: props.fingerprint.certificate.sha256,
             operator: "eq",
           },
