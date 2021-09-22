@@ -18,7 +18,7 @@ repos:
         args: ["--ignore=E501,W503"]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.21.2
+    rev: v2.25.1
     hooks:
       - id: pyupgrade
         args: [--py37-plus]
@@ -31,12 +31,12 @@ repos:
         exclude: ^.*/?setup\.py$
 
   - repo: https://github.com/psf/black
-    rev: 21.7b0
+    rev: 21.9b0
     hooks:
       - id: black
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v7.31.0
+    rev: v7.32.0
     hooks:
       - id: eslint
         files: \.(ts|vue)$
