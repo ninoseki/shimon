@@ -98,16 +98,18 @@ export default defineComponent({
           },
         ];
         return {
-          key: record.host, link: createLink(JSON.stringify(params))
+          key: record.host,
+          link: createLink(JSON.stringify(params)),
         };
       });
     });
 
     const hasLinks = computed(() => {
       return (
-          props.fingerprint.favicon !== null ||
-          props.fingerprint.certificate !== null ||
-          props.fingerprint.dns.a || null
+        props.fingerprint.favicon !== null ||
+        props.fingerprint.certificate !== null ||
+        props.fingerprint.dns.a ||
+        null
       );
     });
 
