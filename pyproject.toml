@@ -5,7 +5,7 @@ description = ""
 authors = ["Manabu Niseki <manabu.niseki@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 aiodns = "^3.0.0"
 aiofiles = "^0.8.0"
 asyncwhois = "^1.0.0"

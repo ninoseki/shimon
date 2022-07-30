@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 from urllib.parse import urljoin, urlparse, urlunparse
 
 import requests
@@ -31,7 +31,7 @@ def get_default_favicon_url(url: str) -> str:
     return urlunparse((parsed.scheme, parsed.netloc, "favicon.ico", "", "", ""))
 
 
-def get_favicon_urls_from_html(url: str, html: str) -> List[str]:
+def get_favicon_urls_from_html(url: str, html: str) -> list[str]:
     soup = BeautifulSoup(html, features="html.parser")
 
     link_tags = set()
@@ -41,7 +41,7 @@ def get_favicon_urls_from_html(url: str, html: str) -> List[str]:
         ):
             link_tags.add(link_tag)
 
-    icons: List[str] = []
+    icons: list[str] = []
     for tag in link_tags:
         href = tag.get("href", "") or tag.get("content", "")
         href = href.strip()
