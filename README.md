@@ -5,9 +5,29 @@
 
 Calculate fingerprints of a website for OSINT search.
 
+## Requirements
+
+- Python 3.10
+- Node.js v18
+
+## Supported services
+
+- BinaryEdge
+- Censys
+- DomainBigData
+- DomainWatch
+- Onyphe
+- SecurityTrails
+- Shodan
+- SpyOnWeb
+- Spyse
+- urlscan.io
+- VirusTotal
+- ZoomEye
+
 ## Installation
 
-```bassh
+```bash
 git clone https://github.com/ninoseki/mmhdan.git
 
 pip install -r requirements.txt
@@ -20,7 +40,7 @@ npm run build
 ## Dev server
 
 ```bash
-uvicorn app:app --reload
+uvicorn app:app
 ```
 
 ## Demo
