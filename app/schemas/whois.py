@@ -1,5 +1,3 @@
-from typing import Optional
-
 import asyncwhois
 import requests
 from d8s_urls import url_domain
@@ -14,10 +12,10 @@ async def whois(hostname: str, timeout: int = 3):
 
 
 class Whois(APIModel):
-    registrar: Optional[str]
-    registrant_name: Optional[str]
-    registrant_email: Optional[str]
-    registrant_organization: Optional[str]
+    registrar: str | None
+    registrant_name: str | None
+    registrant_email: str | None
+    registrant_organization: str | None
 
     @classmethod
     async def build_from_response(cls, response: requests.Response) -> "Whois":

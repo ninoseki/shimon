@@ -1,4 +1,4 @@
-from typing import Any, List, Literal, Optional, cast
+from typing import Any, Literal, cast
 
 import aiodns
 import requests
@@ -41,7 +41,7 @@ async def query(name: str, query_type: QUERY_TYPES):
         if not isinstance(records, list):
             records = [records]
 
-        return cast(List[Any], records)
+        return cast(list[Any], records)
     except aiodns.error.DNSError:
         return None
 
@@ -51,7 +51,7 @@ async def query_a_records(name: str):
     if records is None:
         return None
 
-    records = cast(List[ares_query_a_result], records)
+    records = cast(list[ares_query_a_result], records)
 
     models = []
     for record in records:
@@ -65,7 +65,7 @@ async def query_aaaa_records(name: str):
     if records is None:
         return None
 
-    records = cast(List[ares_query_aaaa_result], records)
+    records = cast(list[ares_query_aaaa_result], records)
 
     models = []
     for record in records:
@@ -79,7 +79,7 @@ async def query_cname_records(name: str):
     if records is None:
         return None
 
-    records = cast(List[ares_query_cname_result], records)
+    records = cast(list[ares_query_cname_result], records)
 
     models = []
     for record in records:
@@ -93,7 +93,7 @@ async def query_txt_records(name: str):
     if records is None:
         return None
 
-    records = cast(List[ares_query_txt_result], records)
+    records = cast(list[ares_query_txt_result], records)
 
     models = []
     for record in records:
@@ -103,10 +103,10 @@ async def query_txt_records(name: str):
 
 
 class DNS(APIModel):
-    a: Optional[List[A]]
-    aaaa: Optional[List[AAAA]]
-    cname: Optional[List[CNAME]]
-    txt: Optional[List[TXT]]
+    a: list[A] | None
+    aaaa: list[AAAA] | None
+    cname: list[CNAME] | None
+    txt: list[TXT] | None
 
     @classmethod
     async def build_from_response(cls, response: requests.Response) -> "DNS":

@@ -1,5 +1,3 @@
-from typing import Optional
-
 import requests
 from fastapi_utils.api_model import APIModel
 
@@ -17,8 +15,8 @@ class Fingerprint(APIModel):
     tracker: Tracker
     whois: Whois
 
-    favicon: Optional[Favicon]
-    certificate: Optional[Certificate]
+    favicon: Favicon | None
+    certificate: Certificate | None
 
     @classmethod
     async def build_from_response(cls, response: requests.Response):
