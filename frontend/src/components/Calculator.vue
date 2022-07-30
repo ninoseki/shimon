@@ -49,6 +49,7 @@
             :fingerprint="calculateTask.last.value"
           ></DomainBigData>
           <DomainWatch :fingerprint="calculateTask.last.value"></DomainWatch>
+          <ZoomEye :fingerprint="calculateTask.last.value"></ZoomEye>
         </div>
       </div>
     </div>
@@ -74,6 +75,7 @@ import SpyOnWeb from "@/components/services/SpyOnWeb.vue";
 import Spyse from "@/components/services/Spyse.vue";
 import Urlscan from "@/components/services/Urlscan.vue";
 import VirusTotal from "@/components/services/VirusTotal.vue";
+import ZoomEye from "@/components/services/ZoomEye.vue";
 import { ErrorData, Fingerprint } from "@/types";
 
 export default defineComponent({
@@ -93,6 +95,7 @@ export default defineComponent({
     SpyOnWeb,
     DomainWatch,
     DomainBigData,
+    ZoomEye,
   },
   setup() {
     const url = ref<string>("https://example.com");
