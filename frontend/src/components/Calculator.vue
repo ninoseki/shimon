@@ -77,7 +77,7 @@ import VirusTotal from "@/components/services/VirusTotal.vue";
 import { ErrorData, Fingerprint } from "@/types";
 
 export default defineComponent({
-  name: "Calculator",
+  name: "CalculatorComponent",
   components: {
     BinaryEdge,
     Censys,

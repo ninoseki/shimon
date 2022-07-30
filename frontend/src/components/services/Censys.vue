@@ -30,7 +30,7 @@ import { computed, defineComponent, PropType } from "vue";
 import { Fingerprint } from "@/types";
 
 export default defineComponent({
-  name: "Censys",
+  name: "CensysComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,

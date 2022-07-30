@@ -28,7 +28,7 @@ import { computed, defineComponent, PropType } from "vue";
 import { Fingerprint } from "@/types";
 
 export default defineComponent({
-  name: "SpyOnWeb",
+  name: "SpyOnWebComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,

@@ -39,7 +39,7 @@ import { computed, defineComponent, PropType } from "vue";
 import { Fingerprint } from "@/types";
 
 export default defineComponent({
-  name: "Shodan",
+  name: "ShodanComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,
