@@ -36,7 +36,7 @@ import { Fingerprint } from "@/types";
 import { convertToColonSeparatedText } from "@/utils";
 
 export default defineComponent({
-  name: "BinaryEdge",
+  name: "BinaryEdgeComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,

@@ -164,7 +164,7 @@ import { defineComponent, PropType } from "vue";
 import { Fingerprint } from "@/types";
 
 export default defineComponent({
-  name: "Fingerprint",
+  name: "FingerprintComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,

@@ -3,23 +3,23 @@ module.exports = {
   env: {
     node: true,
   },
-  plugins: ["simple-import-sort"],
-
   extends: [
     "plugin:vue/vue3-essential",
     "eslint:recommended",
     "@vue/typescript/recommended",
-    "@vue/prettier",
-    "@vue/prettier/@typescript-eslint",
+    "plugin:prettier/recommended",
   ],
+  plugins: ["simple-import-sort"],
   parserOptions: {
     ecmaVersion: 2020,
   },
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
+    "simple-import-sort/exports":
+      process.env.NODE_ENV === "production" ? "warn" : "off",
+    "simple-import-sort/imports":
+      process.env.NODE_ENV === "production" ? "warn" : "off",
   },
   overrides: [
     {

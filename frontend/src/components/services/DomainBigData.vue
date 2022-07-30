@@ -29,7 +29,7 @@ import { computed, defineComponent, PropType } from "vue";
 import { Fingerprint } from "@/types";
 
 export default defineComponent({
-  name: "DomainBigData",
+  name: "DomainBigDataComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,
