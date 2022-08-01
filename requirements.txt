@@ -88,7 +88,7 @@ uvloop==0.16.0; sys_platform != "win32" and sys_platform != "cygwin" and platfor
 watchfiles==0.16.1; python_version >= "3.7"
 websockets==10.3; python_version >= "3.7"
 werkzeug==2.2.1; python_version >= "3.7"
-whodap==0.1.4; python_version >= "3.6" and python_version < "4"
+whodap==0.1.6; python_version >= "3.6" and python_version < "4"
 whois-parser==0.1.4; python_full_version >= "3.6.2" and python_full_version < "4.0.0"
 whois==0.9.16
 win32-setctime==1.1.0; sys_platform == "win32" and python_version >= "3.5"
