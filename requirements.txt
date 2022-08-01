@@ -2,7 +2,7 @@ aiodns==3.0.0
 aiofiles==0.8.0; python_version >= "3.6" and python_version < "4.0"
 anyio==3.6.1; python_version >= "3.7" and python_full_version >= "3.6.2"
 async-timeout==4.0.2; python_version >= "3.6"
-asyncwhois==1.0.0; python_version >= "3.6"
+asyncwhois==1.0.1; python_version >= "3.6"
 atomicwrites==1.4.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0"
 attrs==22.1.0; python_version >= "3.7"
 beautifulsoup4==4.11.1; python_full_version >= "3.6.0"
