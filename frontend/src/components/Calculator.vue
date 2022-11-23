@@ -72,7 +72,6 @@ import Onyphe from "@/components/services/Onyphe.vue";
 import SecurityTrails from "@/components/services/SecurityTrails.vue";
 import Shodan from "@/components/services/Shodan.vue";
 import SpyOnWeb from "@/components/services/SpyOnWeb.vue";
-import Spyse from "@/components/services/Spyse.vue";
 import Urlscan from "@/components/services/Urlscan.vue";
 import VirusTotal from "@/components/services/VirusTotal.vue";
 import ZoomEye from "@/components/services/ZoomEye.vue";
@@ -88,7 +87,6 @@ export default defineComponent({
     Loading,
     Onyphe,
     Shodan,
-    Spyse,
     Urlscan,
     VirusTotal,
     SecurityTrails,
