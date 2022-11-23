@@ -3,7 +3,6 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 
 // Polyfill
-import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 import { createApp } from "vue";

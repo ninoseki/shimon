@@ -1,6 +1,6 @@
 name: Python CI
 
-on: ["pull_request"]
+on: ["pull_request", "push"]
 
 jobs:
   build:
@@ -8,30 +8,23 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
-        poetry-version: [1.1.14]
+        poetry-version: [1.2.2]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
+      - uses: actions/checkout@v3
 
       - name: Setup poetry
-        uses: abatilo/actions-poetry@v2.0.0
+        uses: abatilo/actions-poetry@v2
         with:
           poetry-version: ${{ matrix.poetry-version }}
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
+      - uses: actions/setup-python@v4
         with:
-          path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-${{ matrix.python-version }}-poetry-${{ matrix.poetry-version }}-${{ hashFiles('poetry.lock') }}
+          python-version: ${{ matrix.python-version }}
+          cache: "poetry"
 
-      - name: Install Python dependencies
-        if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: |
-          poetry install
+      - name: Install dependencies
+        run: poetry install
 
       - name: Run tests
         run: poetry run pytest --cov=app
