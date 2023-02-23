@@ -5,39 +5,40 @@ description = ""
 authors = ["Manabu Niseki <manabu.niseki@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 aiodns = "^3.0.0"
-aiofiles = "^0.8.0"
-asyncwhois = "^1.0.1"
-beautifulsoup4 = "^4.11.1"
+aiofiles = "^23.1.0"
+asyncwhois = "^1.0.2"
+beautifulsoup4 = "^4.11.2"
 d8s-urls = "^0.6.0"
-fastapi = "^0.87.0"
+fastapi = "^0.92.0"
 fastapi-utils = "^0.2.1"
 gunicorn = "^20.1.0"
-ioc-finder = "^7.2.4"
+ioc-finder = "^7.3.0"
 loguru = "^0.6.0"
 mmh3 = "^3.0.0"
-pyOpenSSL = "^22.1.0"
-requests = {extras = ["security"], version = "^2.28.1"}
+pyOpenSSL = "^23.0.0"
+requests = {extras = ["security"], version = "^2.28.2"}
 tldextract = "^3.4.0"
 uvicorn = {extras = ["standard"], version = "^0.20.0"}
 whois-parser = "^0.1.4"
 
-[tool.poetry.dev-dependencies]
-autoflake = "^1.7"
+[tool.poetry.group.dev.dependencies]
+autoflake = "^2.0"
 autopep8 = "^2.0"
-black = "^22.10.0"
+black = "^23.1"
 coveralls = "^3.3.1"
-flake8 = "^5.0.4"
-isort = "^5.10.1"
-mypy = "^0.991"
-pre-commit = "^2.20.0"
-pytest = "^7.2.0"
+flake8 = "^6.0"
+isort = "^5.12"
+mypy = "^1.0"
+pre-commit = "^3.1"
+pytest = "^7.2"
 pytest-cov = "^4.0.0"
 pytest-mock = "^3.10.0"
+pytest-pretty = "^1.1.0"
 pytest-randomly = "^3.12.0"
-pytest-sugar = "^0.9.6"
-pyupgrade = "^3.2.2"
+pyupgrade = "^3.3.1"
+types-requests = "^2.28.11.14"
 vcrpy = "^4.2.1"
 
 [build-system]

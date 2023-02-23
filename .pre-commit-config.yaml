@@ -1,6 +1,12 @@
 repos:
-  - repo: https://github.com/humitos/mirrors-autoflake
-    rev: v1.3
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.2.2
+    hooks:
+      - id: pyupgrade
+        args: [--py311-plus]
+
+  - repo: https://github.com/pycqa/autoflake
+    rev: v2.0.1
     hooks:
       - id: autoflake
         args:
@@ -10,36 +16,38 @@ repos:
             "--remove-unused-variable",
           ]
 
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.2.2
-    hooks:
-      - id: pyupgrade
-        args: [--py310-plus]
-
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 4.0.1
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
     hooks:
       - id: flake8
         additional_dependencies: [flake8-print]
         args: ["--ignore=E501,W503,E203"]
 
   - repo: https://github.com/timothycrosley/isort
-    rev: 5.10.1
+    rev: 5.12.0
     hooks:
       - id: isort
-        additional_dependencies: [toml]
-        exclude: ^.*/?setup\.py$
         args: ["--profile", "black"]
 
   - repo: https://github.com/psf/black
-    rev: 22.10.0
+    rev: 23.1.0
     hooks:
       - id: black
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.28.0
+    rev: v8.34.0
     hooks:
       - id: eslint
         files: \.(ts|vue)$
         types: [file]
         args: [--fix, --quiet]
+        additional_dependencies:
+          - "@typescript-eslint/eslint-plugin@5.53.0"
+          - "@typescript-eslint/eslint-plugin@5.53.0"
+          - "@typescript-eslint/parser@5.53.0"
+          - "@vue/eslint-config-typescript@11.0.2"
+          - eslint-config-prettier@8.6.0
+          - eslint-plugin-prettier@4.2.1
+          - eslint-plugin-simple-import-sort@10.0.0
+          - eslint-plugin-vue@9.9.0
+          - eslint@8.34.0
