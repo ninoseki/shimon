@@ -6,7 +6,7 @@ from whois_parser import WhoisParser
 
 
 async def whois(hostname: str, timeout: int = 3):
-    result = await asyncwhois.aio_lookup(hostname, timeout)
+    result = await asyncwhois.aio_whois_domain(hostname, timeout=timeout)
     parser = WhoisParser()
     return parser.parse(result.query_output, hostname=hostname)
 
