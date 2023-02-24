@@ -2,7 +2,6 @@ from typing import Optional
 from urllib.parse import urljoin, urlparse, urlunparse
 
 import requests
-from bs4 import BeautifulSoup
 
 from app.schemas.resource import Resource
 from app.schemas.utils import (
@@ -12,6 +11,7 @@ from app.schemas.utils import (
     get_response,
     get_sha1,
     get_sha256,
+    get_soup,
 )
 
 LINK_RELS = [
@@ -32,7 +32,7 @@ def get_default_favicon_url(url: str) -> str:
 
 
 def get_favicon_urls_from_html(url: str, html: str) -> list[str]:
-    soup = BeautifulSoup(html, features="html.parser")
+    soup = get_soup(html)
 
     link_tags = set()
     for rel in LINK_RELS:

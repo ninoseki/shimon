@@ -1,8 +1,15 @@
 import base64
 import hashlib
+from functools import lru_cache
 
 import mmh3
 import requests
+from bs4 import BeautifulSoup
+
+
+@lru_cache(maxsize=128)
+def get_soup(html: str):
+    return BeautifulSoup(html, features="html.parser")
 
 
 def get_response(url: str) -> requests.Response:

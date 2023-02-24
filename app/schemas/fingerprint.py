@@ -1,5 +1,6 @@
 import requests
 from fastapi_utils.api_model import APIModel
+from pydantic import Field
 
 from app.schemas.certificate import Certificate
 from app.schemas.dns import DNS
@@ -18,6 +19,8 @@ class Fingerprint(APIModel):
     favicon: Favicon | None
     certificate: Certificate | None
 
+    headers: dict[str, str] = Field(default_factory=dict)
+
     @classmethod
     async def build_from_response(cls, response: requests.Response):
         html = HTML.build_from_response(response)
@@ -35,4 +38,5 @@ class Fingerprint(APIModel):
             dns=dns,
             tracker=tracker,
             whois=whois,
+            headers=dict(response.headers),
         )
