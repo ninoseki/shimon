@@ -17,8 +17,9 @@ COPY pyproject.toml poetry.lock requirements.txt /backend/
 COPY gunicorn.conf.py /backend/
 COPY app /backend/app
 
-RUN pip install --no-cache-dir -r requirements.txt \
-  && poetry install --without dev
+RUN pip install --no-cache-dir -r requirements.txt && \
+  poetry config virtualenvs.create false && \
+  poetry install --without dev
 
 COPY --from=build /frontend /backend/frontend
 
@@ -26,4 +27,4 @@ ENV PORT 8000
 
 EXPOSE $PORT
 
-CMD poetry run gunicorn -k uvicorn.workers.UvicornWorker app.main:app
+CMD gunicorn -k uvicorn.workers.UvicornWorker app.main:app
