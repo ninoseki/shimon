@@ -1,0 +1,11 @@
+{
+  "name": "mmhdan",
+  "description": "Calculate fingerprints of a website for OSINT search",
+  "keywords": [
+    "OSINT"
+  ],
+  "website": "https://github.com/ninoseki/mmhdan",
+  "repository": "https://github.com/ninoseki/mmhdan",
+  "success_url": "/",
+  "stack": "container"
+}
