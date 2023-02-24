@@ -45,9 +45,6 @@
             :fingerprint="calculateTask.last.value"
           ></SecurityTrails>
           <SpyOnWeb :fingerprint="calculateTask.last.value"></SpyOnWeb>
-          <DomainBigData
-            :fingerprint="calculateTask.last.value"
-          ></DomainBigData>
           <DomainWatch :fingerprint="calculateTask.last.value"></DomainWatch>
           <ZoomEye :fingerprint="calculateTask.last.value"></ZoomEye>
         </div>
@@ -66,7 +63,6 @@ import FingerprintComponent from "@/components/Fingerprint.vue";
 import Loading from "@/components/Loading.vue";
 import BinaryEdge from "@/components/services/BinaryEdge.vue";
 import Censys from "@/components/services/Censys.vue";
-import DomainBigData from "@/components/services/DomainBigData.vue";
 import DomainWatch from "@/components/services/DomainWatch.vue";
 import Onyphe from "@/components/services/Onyphe.vue";
 import SecurityTrails from "@/components/services/SecurityTrails.vue";
@@ -92,7 +88,6 @@ export default defineComponent({
     SecurityTrails,
     SpyOnWeb,
     DomainWatch,
-    DomainBigData,
     ZoomEye,
   },
   setup() {
