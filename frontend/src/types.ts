@@ -46,13 +46,22 @@ export interface Whois {
   registrar: string | null;
 }
 
+export interface HTML extends Resource {
+  title: string | null;
+}
+
+export interface Headers {
+  [key: string]: string;
+}
+
 export interface Fingerprint {
-  html: Resource;
+  html: HTML;
   dns: DNS;
   tracker: Tracker;
   whois: Whois;
   favicon: Resource | null;
   certificate: Certificate | null;
+  headers: Headers;
 }
 
 export interface ErrorData {

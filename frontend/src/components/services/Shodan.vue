@@ -19,6 +19,10 @@
 
           <li><a target="_blank" :href="htmlLink">HTML</a></li>
 
+          <li v-if="titleLink">
+            <a target="_blank" :href="titleLink">Title</a>
+          </li>
+
           <li v-if="faviconLink">
             <a target="_blank" :href="faviconLink">Favicon</a>
           </li>
@@ -55,6 +59,13 @@ export default defineComponent({
       return baseUrl + qs.stringify(params);
     };
 
+    const aLinks = computed(() => {
+      return (props.fingerprint.dns.a || []).map((record) => {
+        const query = `ip:${record.host}`;
+        return { key: record.host, link: createLink(query) };
+      });
+    });
+
     const htmlLink = computed(() => {
       const query = `http.html_hash:${props.fingerprint.html.mmh3}`;
       return createLink(query);
@@ -78,7 +89,16 @@ export default defineComponent({
       return createLink(query);
     });
 
-    return { htmlLink, faviconLink, certificateLink };
+    const titleLink = computed(() => {
+      if (props.fingerprint.html.title === null) {
+        return undefined;
+      }
+
+      const query = `http.title:'${props.fingerprint.html.title}'`;
+      return createLink(query);
+    });
+
+    return { htmlLink, faviconLink, certificateLink, titleLink, aLinks };
   },
 });
 </script>
