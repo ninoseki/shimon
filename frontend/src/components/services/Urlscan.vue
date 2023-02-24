@@ -13,7 +13,12 @@
         </h4>
 
         <ul>
+          <li v-for="link in aLinks" :key="link.key">
+            <a target="_blank" :href="link.link">{{ link.key }}</a>
+          </li>
+
           <li><a target="_blank" :href="htmlLink">HTML</a></li>
+
           <li v-if="faviconLink">
             <a target="_blank" :href="faviconLink">Favicon</a>
           </li>
@@ -42,6 +47,13 @@ export default defineComponent({
       return baseUrl + encodeURI(query);
     };
 
+    const aLinks = computed(() => {
+      return (props.fingerprint.dns.a || []).map((record) => {
+        const query = `page.ip:${record.host}`;
+        return { key: record.host, link: createLink(query) };
+      });
+    });
+
     const htmlLink = computed(() => {
       return createLink(props.fingerprint.html.sha256);
     });
@@ -54,7 +66,7 @@ export default defineComponent({
       return createLink(props.fingerprint.favicon.sha256);
     });
 
-    return { htmlLink, faviconLink };
+    return { htmlLink, faviconLink, aLinks };
   },
 });
 </script>

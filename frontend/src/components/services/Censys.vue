@@ -13,7 +13,16 @@
         </h4>
 
         <ul>
+          <li v-for="link in aLinks" :key="link.key">
+            <a target="_blank" :href="link.link">{{ link.key }}</a>
+          </li>
+
           <li><a target="_blank" :href="htmlLink">HTML</a></li>
+
+          <li v-if="titleLink">
+            <a target="_blank" :href="titleLink">Title</a>
+          </li>
+
           <li v-if="certificateLink">
             <a target="_blank" :href="certificateLink">Certificate</a>
           </li>
@@ -48,6 +57,13 @@ export default defineComponent({
       return baseUrl + qs.stringify(params);
     };
 
+    const aLinks = computed(() => {
+      return (props.fingerprint.dns.a || []).map((record) => {
+        const query = `ip:${record.host}`;
+        return { key: record.host, link: createLink(query) };
+      });
+    });
+
     const htmlLink = computed(() => {
       const q = `services.http.response.body_hash:"sha1:${props.fingerprint.html.sha1}"`;
       return createLink(q);
@@ -61,7 +77,16 @@ export default defineComponent({
       return createLink(props.fingerprint.certificate.sha256);
     });
 
-    return { htmlLink, certificateLink };
+    const titleLink = computed(() => {
+      if (props.fingerprint.html.title === null) {
+        return undefined;
+      }
+
+      const q = `services.http.response.html_title:"${props.fingerprint.html.title}"`;
+      return createLink(q);
+    });
+
+    return { htmlLink, certificateLink, titleLink, aLinks };
   },
 });
 </script>
