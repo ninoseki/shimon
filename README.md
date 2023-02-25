@@ -7,7 +7,7 @@ Calculate fingerprints of a website for OSINT search.
 
 ## Requirements
 
-- Python 3.10
+- Python 3.11
 - Node.js v18
 
 ## Supported services
@@ -31,6 +31,7 @@ Calculate fingerprints of a website for OSINT search.
 git clone https://github.com/ninoseki/mmhdan.git
 
 pip install -r requirements.txt
+poetry install
 
 cd frontend
 npm install
@@ -40,9 +41,9 @@ npm run build
 ## Dev server
 
 ```bash
-uvicorn app:app
+uvicorn app.main:app
 ```
 
 ## Demo
 
-* https://mmhdan.herokuapp.com/
+- https://mmhdan.herokuapp.com/
