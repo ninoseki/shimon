@@ -72,7 +72,7 @@ export default defineComponent({
       }
 
       const sha1 = convertToColonSeparatedText(
-        props.fingerprint.certificate.sha1
+        props.fingerprint.certificate.sha1,
       );
       const query = `ssl.cert.sha1_fingerprint:"${sha1}"`;
       return createLink(query);

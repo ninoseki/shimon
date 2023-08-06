@@ -3,9 +3,10 @@ import ssl
 from typing import Optional, cast
 
 import requests
-from d8s_urls import url_domain
 from fastapi_utils.api_model import APIModel
 from OpenSSL import crypto
+
+from app.utils import url_domain
 
 
 class Certificate(APIModel):
