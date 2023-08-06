@@ -16,6 +16,9 @@
           <li>
             <a target="_blank" :href="htmlLink">HTML</a>
           </li>
+          <li>
+            <a target="_blank" :href="faviconLink">Favicon</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -50,7 +53,12 @@ export default defineComponent({
       return createLink(query);
     });
 
-    return { htmlLink };
+    const faviconLink = computed(() => {
+      const query = `category:datascan app.favicon.imagemmh3:"${props.fingerprint.favicon?.mmh3}"`;
+      return createLink(query);
+    });
+
+    return { htmlLink, faviconLink };
   },
 });
 </script>
