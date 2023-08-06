@@ -2,7 +2,6 @@ from typing import Any, Literal, cast
 
 import aiodns
 import requests
-from d8s_urls import url_domain
 from fastapi_utils.api_model import APIModel
 from pycares import (
     ares_query_a_result,
@@ -10,6 +9,8 @@ from pycares import (
     ares_query_cname_result,
     ares_query_txt_result,
 )
+
+from app.utils import url_domain
 
 QUERY_TYPES = Literal["A", "AAAA", "CNAME", "TXT"]
 

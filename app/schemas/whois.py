@@ -1,8 +1,9 @@
 import asyncwhois
 import requests
-from d8s_urls import url_domain
 from fastapi_utils.api_model import APIModel
 from whois_parser import WhoisParser
+
+from app.utils import url_domain
 
 
 async def whois(hostname: str, timeout: int = 3):
