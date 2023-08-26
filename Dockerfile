@@ -29,4 +29,4 @@ ENV PORT 8000
 
 EXPOSE $PORT
 
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "backend.main:app"]
+CMD ["poetry", "run", "gunicorn", "-k", "uvicorn.workers.UvicornWorker", "backend.main:app"]
