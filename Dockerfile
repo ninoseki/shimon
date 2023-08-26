@@ -21,6 +21,7 @@ COPY gunicorn.conf.py ./
 COPY backend ./backend
 
 RUN pip install --no-cache-dir -r requirements.txt \
+  && poetry config virtualenvs.create false \
   && poetry install --without dev
 
 COPY --from=build /frontend ./frontend
@@ -29,4 +30,4 @@ ENV PORT 8000
 
 EXPOSE $PORT
 
-CMD ["poetry", "run", "gunicorn", "-k", "uvicorn.workers.UvicornWorker", "backend.main:app"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "backend.main:app"]
