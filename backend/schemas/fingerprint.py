@@ -16,8 +16,8 @@ class Fingerprint(APIModel):
     tracker: Tracker
     whois: Whois
 
-    favicon: Favicon | None
-    certificate: Certificate | None
+    favicon: Favicon | None = Field(default=None)
+    certificate: Certificate | None = Field(default=None)
 
     headers: dict[str, str] = Field(default_factory=dict)
 

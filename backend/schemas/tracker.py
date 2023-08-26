@@ -1,12 +1,13 @@
 import requests
 from ioc_finder import parse_google_adsense_ids, parse_google_analytics_ids
+from pydantic import Field
 
 from .api_model import APIModel
 
 
 class Tracker(APIModel):
-    google_adsense_id: str | None
-    google_analytics_id: str | None
+    google_adsense_id: str | None = Field(default=None)
+    google_analytics_id: str | None = Field(default=None)
 
     @classmethod
     def parse_response(cls, response: requests.Response) -> "Tracker":

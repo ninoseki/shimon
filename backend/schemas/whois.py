@@ -1,5 +1,6 @@
 import asyncwhois
 import requests
+from pydantic import Field
 from whois_parser import WhoisParser
 
 from backend.utils import url_domain
@@ -14,10 +15,10 @@ async def whois(hostname: str, timeout: int = 3):
 
 
 class Whois(APIModel):
-    registrar: str | None
-    registrant_name: str | None
-    registrant_email: str | None
-    registrant_organization: str | None
+    registrar: str | None = Field(default=None)
+    registrant_name: str | None = Field(default=None)
+    registrant_email: str | None = Field(default=None)
+    registrant_organization: str | None = Field(default=None)
 
     @classmethod
     async def parse_response(cls, response: requests.Response) -> "Whois":
