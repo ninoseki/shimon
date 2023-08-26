@@ -3,8 +3,8 @@ from urllib.parse import urljoin, urlparse, urlunparse
 
 import requests
 
-from app.schemas.resource import Resource
-from app.schemas.utils import (
+from .resource import Resource
+from .utils import (
     get_content_type,
     get_md5,
     get_mmh3,
@@ -67,7 +67,7 @@ def get_favicon_urls_from_html(url: str, html: str) -> list[str]:
 
 class Favicon(Resource):
     @classmethod
-    def build_from_response(cls, response: requests.Response) -> Optional["Favicon"]:
+    def parse_response(cls, response: requests.Response) -> Optional["Favicon"]:
         favicon_urls = get_favicon_urls_from_html(response.url, response.text)
         favicon_urls.append(get_default_favicon_url(response.url))
 

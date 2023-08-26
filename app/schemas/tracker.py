@@ -1,6 +1,7 @@
 import requests
-from fastapi_utils.api_model import APIModel
 from ioc_finder import parse_google_adsense_ids, parse_google_analytics_ids
+
+from .api_model import APIModel
 
 
 class Tracker(APIModel):
@@ -8,7 +9,7 @@ class Tracker(APIModel):
     google_analytics_id: str | None
 
     @classmethod
-    def build_from_response(cls, response: requests.Response) -> "Tracker":
+    def parse_response(cls, response: requests.Response) -> "Tracker":
         html = response.text
 
         adsense_id: str | None = None

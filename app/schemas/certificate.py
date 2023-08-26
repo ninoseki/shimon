@@ -3,10 +3,11 @@ import ssl
 from typing import Optional, cast
 
 import requests
-from fastapi_utils.api_model import APIModel
 from OpenSSL import crypto
 
 from app.utils import url_domain
+
+from .api_model import APIModel
 
 
 class Certificate(APIModel):
@@ -15,9 +16,7 @@ class Certificate(APIModel):
     serial: str
 
     @classmethod
-    def build_from_response(
-        cls, response: requests.Response
-    ) -> Optional["Certificate"]:
+    def parse_response(cls, response: requests.Response) -> Optional["Certificate"]:
         if not response.url.startswith("https://"):
             return None
 

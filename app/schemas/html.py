@@ -1,17 +1,15 @@
 import requests
 from pydantic import Field
 
-from app.schemas.resource import Resource
-from app.schemas.utils import get_content_type, get_md5, get_mmh3, get_sha1, get_sha256
-
-from .utils import get_soup
+from .resource import Resource
+from .utils import get_content_type, get_md5, get_mmh3, get_sha1, get_sha256, get_soup
 
 
 class HTML(Resource):
     title: str | None = Field(default=None)
 
     @classmethod
-    def build_from_response(cls, response: requests.Response) -> "HTML":
+    def parse_response(cls, response: requests.Response) -> "HTML":
         title: str | None = None
 
         soup = get_soup(response.text)
