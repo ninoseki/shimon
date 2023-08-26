@@ -1,4 +1,4 @@
-from fastapi_utils.api_model import APIModel
+from .api_model import APIModel
 
 
 class Resource(APIModel):

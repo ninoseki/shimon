@@ -2,7 +2,6 @@ from typing import Any, Literal, cast
 
 import aiodns
 import requests
-from fastapi_utils.api_model import APIModel
 from pycares import (
     ares_query_a_result,
     ares_query_aaaa_result,
@@ -11,6 +10,8 @@ from pycares import (
 )
 
 from app.utils import url_domain
+
+from .api_model import APIModel
 
 QUERY_TYPES = Literal["A", "AAAA", "CNAME", "TXT"]
 
@@ -110,7 +111,7 @@ class DNS(APIModel):
     txt: list[TXT] | None
 
     @classmethod
-    async def build_from_response(cls, response: requests.Response) -> "DNS":
+    async def parse_response(cls, response: requests.Response) -> "DNS":
         domain = url_domain(response.url)
 
         a = await query_a_records(domain)

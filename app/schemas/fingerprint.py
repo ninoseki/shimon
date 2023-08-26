@@ -1,13 +1,13 @@
 import requests
-from fastapi_utils.api_model import APIModel
 from pydantic import Field
 
-from app.schemas.certificate import Certificate
-from app.schemas.dns import DNS
-from app.schemas.favicon import Favicon
-from app.schemas.html import HTML
-from app.schemas.tracker import Tracker
-from app.schemas.whois import Whois
+from .api_model import APIModel
+from .certificate import Certificate
+from .dns import DNS
+from .favicon import Favicon
+from .html import HTML
+from .tracker import Tracker
+from .whois import Whois
 
 
 class Fingerprint(APIModel):
@@ -22,14 +22,14 @@ class Fingerprint(APIModel):
     headers: dict[str, str] = Field(default_factory=dict)
 
     @classmethod
-    async def build_from_response(cls, response: requests.Response):
-        html = HTML.build_from_response(response)
-        dns = await DNS.build_from_response(response)
-        tracker = Tracker.build_from_response(response)
-        whois = await Whois.build_from_response(response)
+    async def parse_response(cls, response: requests.Response):
+        dns = await DNS.parse_response(response)
+        whois = await Whois.parse_response(response)
 
-        favicon = Favicon.build_from_response(response)
-        certificate = Certificate.build_from_response(response)
+        html = HTML.parse_response(response)
+        tracker = Tracker.parse_response(response)
+        favicon = Favicon.parse_response(response)
+        certificate = Certificate.parse_response(response)
 
         return cls(
             html=html,

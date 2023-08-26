@@ -1,9 +1,10 @@
 import asyncwhois
 import requests
-from fastapi_utils.api_model import APIModel
 from whois_parser import WhoisParser
 
 from app.utils import url_domain
+
+from .api_model import APIModel
 
 
 async def whois(hostname: str, timeout: int = 3):
@@ -19,7 +20,7 @@ class Whois(APIModel):
     registrant_organization: str | None
 
     @classmethod
-    async def build_from_response(cls, response: requests.Response) -> "Whois":
+    async def parse_response(cls, response: requests.Response) -> "Whois":
         domain = url_domain(response.url)
 
         try:
