@@ -1,10 +1,6 @@
-import vcr
 from fastapi.testclient import TestClient
 
 
-@vcr.use_cassette(
-    "tests/fixtures/vcr_cassettes/example.yaml", ignore_hosts=["testserver"]
-)  # type: ignore
 def test_example_com(client: TestClient):
     resp = client.get(
         "/api/fingerprint/calculate", params={"url": "http://example.com"}
@@ -27,9 +23,6 @@ def test_example_com(client: TestClient):
     assert data.get("certificate") is None
 
 
-@vcr.use_cassette(
-    "tests/fixtures/vcr_cassettes/https_example.yaml", ignore_hosts=["testserver"]
-)  # type: ignore
 def test_https_example_com(client: TestClient):
     resp = client.get(
         "/api/fingerprint/calculate", params={"url": "https://example.com"}
