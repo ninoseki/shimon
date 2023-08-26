@@ -5,7 +5,9 @@ COPY ./frontend /frontend
 
 WORKDIR /frontend
 
-RUN npm install && npm run build && rm -rf node_modules
+RUN npm install \
+  && npm run build \
+  && rm -rf node_modules
 
 # prod env
 FROM python:3.11-alpine
@@ -16,10 +18,9 @@ WORKDIR /usr/src/app
 
 COPY pyproject.toml poetry.lock requirements.txt ./
 COPY gunicorn.conf.py ./
-COPY backend ./
+COPY backend ./backend
 
 RUN pip install --no-cache-dir -r requirements.txt \
-  && poetry config virtualenvs.create false \
   && poetry install --without dev
 
 COPY --from=build /frontend ./frontend
@@ -28,4 +29,4 @@ ENV PORT 8000
 
 EXPOSE $PORT
 
-CMD gunicorn -k uvicorn.workers.UvicornWorker backend.main:app
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "backend.main:app"]
