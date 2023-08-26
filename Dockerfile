@@ -1,9 +1,10 @@
 # build env
-FROM node:18-alpine as build
+FROM node:20-alpine as build
 
 COPY ./frontend /frontend
+
 WORKDIR /frontend
-ENV NODE_OPTIONS --openssl-legacy-provider
+
 RUN npm install && npm run build && rm -rf node_modules
 
 # prod env
@@ -11,20 +12,20 @@ FROM python:3.11-alpine
 
 RUN apk --no-cache add whois build-base libffi-dev
 
-WORKDIR /backend
+WORKDIR /usr/src/app
 
-COPY pyproject.toml poetry.lock requirements.txt /backend/
-COPY gunicorn.conf.py /backend/
-COPY app /backend/app
+COPY pyproject.toml poetry.lock requirements.txt ./
+COPY gunicorn.conf.py ./
+COPY backend ./
 
-RUN pip install --no-cache-dir -r requirements.txt && \
-  poetry config virtualenvs.create false && \
-  poetry install --without dev
+RUN pip install --no-cache-dir -r requirements.txt \
+  && poetry config virtualenvs.create false \
+  && poetry install --without dev
 
-COPY --from=build /frontend /backend/frontend
+COPY --from=build /frontend ./frontend
 
 ENV PORT 8000
 
 EXPOSE $PORT
 
-CMD gunicorn -k uvicorn.workers.UvicornWorker app.main:app
+CMD gunicorn -k uvicorn.workers.UvicornWorker backend.main:app

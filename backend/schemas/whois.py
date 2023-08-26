@@ -2,7 +2,7 @@ import asyncwhois
 import requests
 from whois_parser import WhoisParser
 
-from app.utils import url_domain
+from backend.utils import url_domain
 
 from .api_model import APIModel
 

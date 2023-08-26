@@ -9,7 +9,7 @@ from pycares import (
     ares_query_txt_result,
 )
 
-from app.utils import url_domain
+from backend.utils import decode_str_byte, url_domain
 
 from .api_model import APIModel
 
@@ -57,7 +57,7 @@ async def query_a_records(name: str):
 
     models = []
     for record in records:
-        models.append(A(host=record.host, ttl=record.ttl))
+        models.append(A(host=decode_str_byte(record.host), ttl=record.ttl))
 
     return models
 
@@ -71,7 +71,7 @@ async def query_aaaa_records(name: str):
 
     models = []
     for record in records:
-        models.append(AAAA(host=record.host, ttl=record.ttl))
+        models.append(AAAA(host=decode_str_byte(record.host), ttl=record.ttl))
 
     return models
 
@@ -85,7 +85,7 @@ async def query_cname_records(name: str):
 
     models = []
     for record in records:
-        models.append(CNAME(cname=record.cname, ttl=record.ttl))
+        models.append(CNAME(cname=decode_str_byte(record.cname), ttl=record.ttl))
 
     return models
 
@@ -99,7 +99,7 @@ async def query_txt_records(name: str):
 
     models = []
     for record in records:
-        models.append(TXT(text=record.text, ttl=record.ttl))
+        models.append(TXT(text=decode_str_byte(record.text), ttl=record.ttl))
 
     return models
 
