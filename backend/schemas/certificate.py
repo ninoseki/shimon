@@ -5,7 +5,7 @@ from typing import Optional, cast
 import requests
 from OpenSSL import crypto
 
-from app.utils import url_domain
+from backend.utils import url_domain
 
 from .api_model import APIModel
 
@@ -28,7 +28,7 @@ class Certificate(APIModel):
         ssl_socket = context.wrap_socket(connection, server_hostname=hostname)
         peer_cert = cast(bytes, ssl_socket.getpeercert(True))
         pem_cert = ssl.DER_cert_to_PEM_cert(peer_cert)
-        cert: crypto.X509 = crypto.load_certificate(crypto.FILETYPE_PEM, pem_cert)
+        cert: crypto.X509 = crypto.load_certificate(crypto.FILETYPE_PEM, pem_cert)  # type: ignore
 
         sha256 = cert.digest("sha256").decode().replace(":", "").lower()
         sha1 = cert.digest("sha1").decode().replace(":", "").lower()

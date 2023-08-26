@@ -1,4 +1,4 @@
-from app.api.endpoints.fingerprint import validate_url
+from backend.api.endpoints.fingerprint import validate_url
 
 
 def test_validate_url():

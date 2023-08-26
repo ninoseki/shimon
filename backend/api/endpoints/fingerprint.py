@@ -3,8 +3,8 @@ from urllib.parse import urlparse
 import requests
 from fastapi import APIRouter, HTTPException
 
-from app.schemas.fingerprint import Fingerprint
-from app.schemas.utils import get_response
+from backend.schemas.fingerprint import Fingerprint
+from backend.schemas.utils import get_response
 
 router = APIRouter()
 
