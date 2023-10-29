@@ -1,64 +1,60 @@
 <template>
-  <div class="column is-half">
-    <div class="box">
-      <div class="content is-normal">
-        <h4 class="is-size-4">
-          <span class="icon">
-            <img
-              src="https://www.google.com/s2/favicons?domain=onyphe.io"
-              alt="shodan"
-            />
-          </span>
-          Onyphe
-        </h4>
-
-        <ul>
-          <li>
-            <a target="_blank" :href="htmlLink">HTML</a>
-          </li>
-          <li>
-            <a target="_blank" :href="faviconLink">Favicon</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="box content is-normal">
+    <h4 class="is-size-4">
+      <span class="icon">
+        <img src="https://www.google.com/s2/favicons?domain=onyphe.io" alt="shodan" />
+      </span>
+      Onyphe
+    </h4>
+    <QueryTags :queries="queries"></QueryTags>
   </div>
 </template>
 
 <script lang="ts">
-import * as qs from "qs";
-import { computed, defineComponent, PropType } from "vue";
+import * as qs from "qs"
+import { computed, defineComponent, type PropType } from "vue"
 
-import { Fingerprint } from "@/types";
+import QueryTags from "@/components/services/QueryTags.vue"
+import type { Fingerprint, Query } from "@/types"
 
 export default defineComponent({
   name: "OnypheComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,
-      required: true,
-    },
+      required: true
+    }
+  },
+  components: {
+    QueryTags
   },
   setup(props) {
     const createLink = (query: string): string => {
-      const baseUrl = "https://onyphe.io/search/?";
+      const baseUrl = "https://onyphe.io/search/?"
       const params = {
-        query,
-      };
-      return baseUrl + qs.stringify(params);
-    };
+        query
+      }
+      return baseUrl + qs.stringify(params)
+    }
 
-    const htmlLink = computed(() => {
-      const query = `category:datascan app.http.bodymd5:"${props.fingerprint.html.md5}"`;
-      return createLink(query);
-    });
+    const queries = computed<Query[]>(() => {
+      const q: Query[] = [
+        {
+          key: "HTML",
+          query: `category:datascan app.http.bodymd5:"${props.fingerprint.html.md5}"`,
+          link: createLink(`category:datascan app.http.bodymd5:"${props.fingerprint.html.md5}"`)
+        }
+      ]
 
-    const faviconLink = computed(() => {
-      const query = `category:datascan app.favicon.imagemmh3:"${props.fingerprint.favicon?.mmh3}"`;
-      return createLink(query);
-    });
+      if (props.fingerprint.favicon) {
+        const query = `category:datascan app.favicon.imagemmh3:"${props.fingerprint.favicon?.mmh3}"`
+        q.push({ key: "Favicon", query: query, link: createLink(query) })
+      }
 
-    return { htmlLink, faviconLink };
-  },
-});
+      return q
+    })
+
+    return { queries }
+  }
+})
 </script>

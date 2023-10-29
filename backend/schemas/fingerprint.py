@@ -1,4 +1,5 @@
-import requests
+import typing
+
 from pydantic import Field
 
 from .api_model import APIModel
@@ -19,24 +20,4 @@ class Fingerprint(APIModel):
     favicon: Favicon | None = Field(default=None)
     certificate: Certificate | None = Field(default=None)
 
-    headers: dict[str, str] = Field(default_factory=dict)
-
-    @classmethod
-    async def parse_response(cls, response: requests.Response):
-        dns = await DNS.parse_response(response)
-        whois = await Whois.parse_response(response)
-
-        html = HTML.parse_response(response)
-        tracker = Tracker.parse_response(response)
-        favicon = Favicon.parse_response(response)
-        certificate = Certificate.parse_response(response)
-
-        return cls(
-            html=html,
-            certificate=certificate,
-            favicon=favicon,
-            dns=dns,
-            tracker=tracker,
-            whois=whois,
-            headers=dict(response.headers),
-        )
+    headers: dict[str, typing.Any] = Field(default_factory=dict)

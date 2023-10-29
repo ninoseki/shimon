@@ -4,23 +4,36 @@
       <p>Warning</p>
     </div>
     <div class="message-body">
-      {{ error?.detail || "Something went wrong..." }}
+      <div v-if="error?.detail">
+        <VueJsonPretty :data="anyError"></VueJsonPretty>
+      </div>
+      <div v-else>Something went wrong...</div>
     </div>
   </article>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import "vue-json-pretty/lib/styles.css"
 
-import { ErrorData } from "@/types";
+import { computed, defineComponent, type PropType } from "vue"
+import VueJsonPretty from "vue-json-pretty"
+
+import type { ErrorData } from "@/types"
 
 export default defineComponent({
   name: "ErrorMessage",
   props: {
     error: {
       type: Object as PropType<ErrorData>,
-      required: false,
-    },
+      required: false
+    }
   },
-});
+  components: { VueJsonPretty },
+  setup(props) {
+    const anyError = computed(() => {
+      return props.error as any
+    })
+    return { anyError }
+  }
+})
 </script>

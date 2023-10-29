@@ -1,75 +1,55 @@
 <template>
-  <div class="column is-half" v-if="hasLinks">
-    <div class="box">
-      <div class="content is-normal">
-        <h4 class="is-size-4">
-          <span class="icon">
-            <img
-              src="https://www.google.com/s2/favicons?domain=www.zoomeye.org"
-              alt="zoomeye"
-            />
-          </span>
-          ZoomEye
-        </h4>
-
-        <ul>
-          <li v-if="faviconLink">
-            <a target="_blank" :href="faviconLink">Favicon</a>
-          </li>
-
-          <li v-if="certificateLink">
-            <a target="_blank" :href="certificateLink">Certificate</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="box content is-normal" v-if="queries.length > 0">
+    <h4 class="is-size-4">
+      <span class="icon">
+        <img src="https://www.google.com/s2/favicons?domain=www.zoomeye.org" alt="zoomeye" />
+      </span>
+      ZoomEye
+    </h4>
+    <QueryTags :queries="queries"></QueryTags>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import { computed, defineComponent, type PropType } from "vue"
 
-import { Fingerprint } from "@/types";
+import QueryTags from "@/components/services/QueryTags.vue"
+import type { Fingerprint, Query } from "@/types"
 
 export default defineComponent({
   name: "ZoomEyeComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,
-      required: true,
-    },
+      required: true
+    }
+  },
+  components: {
+    QueryTags
   },
   setup(props) {
     const createLink = (query: string): string => {
-      const baseUrl = "https://www.zoomeye.org/searchResult?q=";
-      return baseUrl + encodeURI(query);
-    };
+      const baseUrl = "https://www.zoomeye.org/searchResult?q="
+      return baseUrl + encodeURI(query)
+    }
 
-    const faviconLink = computed(() => {
-      if (props.fingerprint.favicon === null) {
-        return undefined;
+    const queries = computed<Query[]>(() => {
+      const q: Query[] = []
+
+      if (props.fingerprint.favicon) {
+        const query = `iconhash:"${props.fingerprint.favicon.mmh3}"`
+        q.push({ key: "Favicon", query: query, link: createLink(query) })
       }
 
-      const query = `iconhash:"${props.fingerprint.favicon.mmh3}"`;
-      return createLink(query);
-    });
-
-    const certificateLink = computed(() => {
-      if (props.fingerprint.certificate === null) {
-        return undefined;
+      if (props.fingerprint.certificate) {
+        const query = `ssl.cert.fingerprint:"${props.fingerprint.certificate.sha1}"`
+        q.push({ key: "Certificate", query: query, link: createLink(query) })
       }
 
-      const query = `ssl.cert.fingerprint:"${props.fingerprint.certificate.sha1}"`;
-      return createLink(query);
-    });
+      return q
+    })
 
-    const hasLinks = computed(() => {
-      return (
-        certificateLink.value !== undefined || faviconLink.value !== undefined
-      );
-    });
-
-    return { faviconLink, certificateLink, hasLinks };
-  },
-});
+    return { queries }
+  }
+})
 </script>
