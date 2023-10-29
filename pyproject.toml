@@ -6,40 +6,53 @@ authors = ["Manabu Niseki <manabu.niseki@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-aiodns = "^3.0"
+aiodns = "^3.1"
 aiofiles = "^23.2"
 asyncwhois = "^1.0"
 beautifulsoup4 = "^4.12"
-fastapi = "^0.102"
+fastapi = "^0.104"
 gunicorn = "^21.2"
-ioc-finder = "^7.3.0"
+ioc-finder = "^7.3"
 loguru = "^0.7"
 mmh3 = "^4.0"
 pyhumps = "^3.8.0"
-pyOpenSSL = "^23.2"
+pyOpenSSL = "^23.3"
 requests = { extras = ["security"], version = "^2.31" }
-tldextract = "^3.4"
+tldextract = "^5.0"
 uvicorn = { extras = ["standard"], version = "^0.23" }
-whois-parser = "^0.1"
 
 [tool.poetry.group.dev.dependencies]
-autoflake = "^2.2"
-autopep8 = "^2.0"
-black = "^23.7"
+black = "^23.10"
 coveralls = "^3.3"
-flake8 = "^6.1"
-isort = "^5.12"
-mypy = "^1.5"
-pre-commit = "^3.3"
+mypy = "^1.6"
+pre-commit = "^3.5"
 pytest = "^7.4"
 pytest-cov = "^4.1"
-pytest-mock = "^3.11"
+pytest-mock = "^3.12"
 pytest-pretty = "^1.2"
 pytest-randomly = "^3.15"
-pyupgrade = "^3.10"
 types-requests = "^2.31"
 vcrpy = "^5.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+select = [
+  "ASYNC", # flake8-async
+  "B",     # flake8-bugbear
+  "C",     # flake8-comprehensions
+  "E",     # pycodestyle errors
+  "F",     # pyflakes
+  "I",     # isort
+  "N",     # pep8-naming
+  "RET",   # flake8-return
+  "RUF",   # Ruff-specific rules
+  "SIM",   # flake8-simplify
+  "T20",   # flake8-print
+  "W",     # pycodestyle warnings
+]
+ignore = [
+  "E501", # line too long, handled by black
+]
