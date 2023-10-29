@@ -1,52 +1,44 @@
 <template>
-  <div class="column is-half" v-if="aLinks.length > 0">
-    <div class="box">
-      <div class="content is-normal">
-        <h4 class="is-size-4">
-          <span class="icon">
-            <img
-              src="https://www.google.com/s2/favicons?domain=securitytrails.com"
-              alt="st"
-            />
-          </span>
-          SecurityTrails
-        </h4>
-
-        <ul>
-          <li v-for="link in aLinks" :key="link.key">
-            <a target="_blank" :href="link.link">{{ link.key }}</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="box content is-normal" v-if="queries.length > 0">
+    <h4 class="is-size-4">
+      <span class="icon">
+        <img src="https://www.google.com/s2/favicons?domain=securitytrails.com" alt="st" />
+      </span>
+      SecurityTrails
+    </h4>
+    <QueryTags :queries="queries"></QueryTags>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import { computed, defineComponent, type PropType } from "vue"
 
-import { Fingerprint } from "@/types";
+import QueryTags from "@/components/services/QueryTags.vue"
+import type { Fingerprint, Query } from "@/types"
 
 export default defineComponent({
   name: "SecurityTrailsComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,
-      required: true,
-    },
+      required: true
+    }
+  },
+  components: {
+    QueryTags
   },
   setup(props) {
     const createLink = (query: string): string => {
-      return `https://securitytrails.com/list/ip/${query}`;
-    };
+      return `https://securitytrails.com/list/ip/${query}`
+    }
 
-    const aLinks = computed(() => {
+    const queries = computed<Query[]>(() => {
       return (props.fingerprint.dns.a || []).map((record) => {
-        return { key: record.host, link: createLink(record.host) };
-      });
-    });
+        return { key: "A", query: record.host, link: createLink(record.host) }
+      })
+    })
 
-    return { aLinks };
-  },
-});
+    return { queries }
+  }
+})
 </script>

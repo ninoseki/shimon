@@ -1,104 +1,75 @@
 <template>
-  <div class="column is-half">
-    <div class="box">
-      <div class="content is-normal">
-        <h4 class="is-size-4">
-          <span class="icon">
-            <img
-              src="https://www.google.com/s2/favicons?domain=shodan.io"
-              alt="shodan"
-            />
-          </span>
-          Shodan
-        </h4>
-
-        <ul>
-          <li v-for="link in aLinks" :key="link.key">
-            <a target="_blank" :href="link.link">{{ link.key }}</a>
-          </li>
-
-          <li><a target="_blank" :href="htmlLink">HTML</a></li>
-
-          <li v-if="titleLink">
-            <a target="_blank" :href="titleLink">Title</a>
-          </li>
-
-          <li v-if="faviconLink">
-            <a target="_blank" :href="faviconLink">Favicon</a>
-          </li>
-
-          <li v-if="certificateLink">
-            <a target="_blank" :href="certificateLink">Certificate</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="box content is-normal">
+    <h4 class="is-size-4">
+      <span class="icon">
+        <img src="https://www.google.com/s2/favicons?domain=shodan.io" alt="shodan" />
+      </span>
+      Shodan
+    </h4>
+    <QueryTags :queries="queries"></QueryTags>
   </div>
 </template>
 
 <script lang="ts">
-import * as qs from "qs";
-import { computed, defineComponent, PropType } from "vue";
+import * as qs from "qs"
+import { computed, defineComponent, type PropType } from "vue"
 
-import { Fingerprint } from "@/types";
+import QueryTags from "@/components/services/QueryTags.vue"
+import type { Fingerprint, Query } from "@/types"
 
 export default defineComponent({
   name: "ShodanComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,
-      required: true,
-    },
+      required: true
+    }
+  },
+  components: {
+    QueryTags
   },
   setup(props) {
     const createLink = (query: string): string => {
-      const baseUrl = "https://shodan.io/search?";
+      const baseUrl = "https://shodan.io/search?"
       const params = {
-        query,
-      };
-      return baseUrl + qs.stringify(params);
-    };
+        query
+      }
+      return baseUrl + qs.stringify(params)
+    }
 
-    const aLinks = computed(() => {
-      return (props.fingerprint.dns.a || []).map((record) => {
-        const query = `ip:${record.host}`;
-        return { key: record.host, link: createLink(query) };
-      });
-    });
+    const queries = computed<Query[]>(() => {
+      const q: Query[] = [
+        {
+          key: "HTML",
+          query: `http.html_hash:${props.fingerprint.html.mmh3}`,
+          link: createLink(`http.html_hash:${props.fingerprint.html.mmh3}`)
+        }
+      ]
 
-    const htmlLink = computed(() => {
-      const query = `http.html_hash:${props.fingerprint.html.mmh3}`;
-      return createLink(query);
-    });
-
-    const faviconLink = computed(() => {
-      if (props.fingerprint.favicon === null) {
-        return undefined;
+      if (props.fingerprint.html.title) {
+        const query = `http.title:'${props.fingerprint.html.title}'`
+        q.push({ key: "Title", query: query, link: createLink(query) })
       }
 
-      const query = `http.favicon.hash:${props.fingerprint.favicon.mmh3}`;
-      return createLink(query);
-    });
-
-    const certificateLink = computed(() => {
-      if (props.fingerprint.certificate === null) {
-        return undefined;
+      if (props.fingerprint.favicon) {
+        const query = `http.favicon.hash:${props.fingerprint.favicon.mmh3}`
+        q.push({ key: "Favicon", query: query, link: createLink(query) })
       }
 
-      const query = `ssl.cert.serial:${props.fingerprint.certificate.serial}`;
-      return createLink(query);
-    });
-
-    const titleLink = computed(() => {
-      if (props.fingerprint.html.title === null) {
-        return undefined;
+      if (props.fingerprint.certificate) {
+        const query = `ssl.cert.serial:${props.fingerprint.certificate.serial}`
+        q.push({ key: "Certificate", query: query, link: createLink(query) })
       }
 
-      const query = `http.title:'${props.fingerprint.html.title}'`;
-      return createLink(query);
-    });
+      ;(props.fingerprint.dns.a || []).forEach((record) => {
+        const query = `ip:${record.host}`
+        q.push({ key: "A", query: query, link: createLink(query) })
+      })
 
-    return { htmlLink, faviconLink, certificateLink, titleLink, aLinks };
-  },
-});
+      return q
+    })
+
+    return { queries }
+  }
+})
 </script>

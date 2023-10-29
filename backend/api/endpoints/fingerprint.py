@@ -1,48 +1,25 @@
-from urllib.parse import urlparse
+from fastapi import APIRouter, HTTPException, status
+from pydantic import BaseModel, HttpUrl, ValidationError
 
-import requests
-from fastapi import APIRouter, HTTPException
-
-from backend.schemas.fingerprint import Fingerprint
-from backend.schemas.utils import get_response
+from backend import schemas, services
 
 router = APIRouter()
 
 
-def validate_url(url: str) -> bool:
-    parsed = urlparse(url)
-
-    valid_schemes = ["http", "https"]
-    if parsed.scheme not in valid_schemes:
-        return False
-
-    valid_paths = [
-        "",
-        "/",
-    ]
-    if parsed.path not in valid_paths:
-        return False
-
-    return True
+class Url(BaseModel):
+    url: HttpUrl
 
 
-@router.get(
-    "/calculate",
-    response_model=Fingerprint,
-    response_description="Fingerprint of a website",
-    summary="Get a fingerprint of an HTML or favicon",
-    description="Returns a fingerprint of a website",
-)
-async def calculate(url: str):
-    if not validate_url(url):
-        raise HTTPException(status_code=400, detail=f"{url} is not a valid URL")
+@router.get("/calculate")
+async def calculate(url: str) -> schemas.Fingerprint:
+    try:
+        Url(url=url)  # type: ignore
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=e.errors()
+        ) from e
 
     try:
-        response = get_response(url)
-    except (requests.HTTPError, requests.ConnectionError) as e:
-        raise HTTPException(status_code=500, detail=f"Cannot get {url}: {e}") from e
-
-    try:
-        return await Fingerprint.parse_response(response)
+        return await services.Fingerprint().call(url)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e)) from e

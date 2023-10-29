@@ -8,16 +8,18 @@ authors = ["Manabu Niseki <manabu.niseki@gmail.com>"]
 python = "^3.11"
 aiodns = "^3.1"
 aiofiles = "^23.2"
+aiometer = "^0.4.0"
 asyncwhois = "^1.0"
 beautifulsoup4 = "^4.12"
 fastapi = "^0.104"
 gunicorn = "^21.2"
+httpx = "^0.25.0"
 ioc-finder = "^7.3"
 loguru = "^0.7"
 mmh3 = "^4.0"
 pyhumps = "^3.8.0"
 pyOpenSSL = "^23.3"
-requests = { extras = ["security"], version = "^2.31" }
+returns = "^0.22"
 tldextract = "^5.0"
 uvicorn = { extras = ["standard"], version = "^0.23" }
 
@@ -31,7 +33,6 @@ pytest-cov = "^4.1"
 pytest-mock = "^3.12"
 pytest-pretty = "^1.2"
 pytest-randomly = "^3.15"
-types-requests = "^2.31"
 vcrpy = "^5.1"
 
 [build-system]
@@ -56,3 +57,6 @@ select = [
 ignore = [
   "E501", # line too long, handled by black
 ]
+
+[tool.mypy]
+plugins = ["pydantic.mypy", "returns.contrib.mypy.returns_plugin"]

@@ -10,7 +10,7 @@ def test_example_com(client: TestClient):
     data = resp.json()
 
     html = data.get("html")
-    assert html.get("url") == "http://example.com/"
+    assert html.get("url") == "http://example.com"
     assert html.get("contentType") == "text/html; charset=UTF-8"
     assert html.get("mmh3") == -2087618365
     assert html.get("md5") == "84238dfc8092e5d9c0dac8ef93371a07"
@@ -35,15 +35,8 @@ def test_https_example_com(client: TestClient):
 
 def test_invalid_urls(client: TestClient):
     # only the root ("/") or favicon is accepted
-    resp = client.get(
-        "/api/fingerprint/calculate", params={"url": "http://example.com/foo"}
-    )
-    assert resp.status_code == 400
-
-    resp = client.get(
-        "/api/fingerprint/calculate", params={"url": "http://example.com/foo/bar"}
-    )
-    assert resp.status_code == 400
+    resp = client.get("/api/fingerprint/calculate", params={"url": "ftp://example.com"})
+    assert resp.status_code == 422
 
     # foo is an invalid parameter
     resp = client.get("/api/fingerprint/calculate", params={"foo": "bar"})

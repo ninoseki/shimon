@@ -1,92 +1,73 @@
 <template>
-  <div class="column is-half">
-    <div class="box">
-      <div class="content is-normal">
-        <h4 class="is-size-4">
-          <span class="icon">
-            <img
-              src="https://www.google.com/s2/favicons?domain=censys.io"
-              alt="shodan"
-            />
-          </span>
-          Censys
-        </h4>
-
-        <ul>
-          <li v-for="link in aLinks" :key="link.key">
-            <a target="_blank" :href="link.link">{{ link.key }}</a>
-          </li>
-
-          <li><a target="_blank" :href="htmlLink">HTML</a></li>
-
-          <li v-if="titleLink">
-            <a target="_blank" :href="titleLink">Title</a>
-          </li>
-
-          <li v-if="certificateLink">
-            <a target="_blank" :href="certificateLink">Certificate</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="box content is-normal">
+    <h4 class="is-size-4">
+      <span class="icon">
+        <img src="https://www.google.com/s2/favicons?domain=censys.io" alt="shodan" />
+      </span>
+      Censys
+    </h4>
+    <QueryTags :queries="queries"></QueryTags>
   </div>
 </template>
 
 <script lang="ts">
-import * as qs from "qs";
-import { computed, defineComponent, PropType } from "vue";
+import * as qs from "qs"
+import { computed, defineComponent, type PropType } from "vue"
 
-import { Fingerprint } from "@/types";
+import QueryTags from "@/components/services/QueryTags.vue"
+import type { Fingerprint, Query } from "@/types"
 
 export default defineComponent({
   name: "CensysComponent",
   props: {
     fingerprint: {
       type: Object as PropType<Fingerprint>,
-      required: true,
-    },
+      required: true
+    }
   },
+  components: { QueryTags },
   setup(props) {
     const createLink = (q: string): string => {
-      const baseUrl = "https://search.censys.io/search?";
-      const resource = "hosts";
+      const baseUrl = "https://search.censys.io/search?"
+      const resource = "hosts"
       const params = {
         q,
-        resource,
-      };
-      return baseUrl + qs.stringify(params);
-    };
+        resource
+      }
+      return baseUrl + qs.stringify(params)
+    }
 
-    const aLinks = computed(() => {
-      return (props.fingerprint.dns.a || []).map((record) => {
-        const query = `ip:${record.host}`;
-        return { key: record.host, link: createLink(query) };
-      });
-    });
+    const queries = computed<Query[]>(() => {
+      const q: Query[] = [
+        {
+          key: "HTML",
+          query: `services.http.response.body_hash:"sha1:${props.fingerprint.html.sha1}"`,
+          link: createLink(`services.http.response.body_hash:"sha1:${props.fingerprint.html.sha1}"`)
+        }
+      ]
 
-    const htmlLink = computed(() => {
-      const q = `services.http.response.body_hash:"sha1:${props.fingerprint.html.sha1}"`;
-      return createLink(q);
-    });
-
-    const certificateLink = computed(() => {
-      if (props.fingerprint.certificate === null) {
-        return undefined;
+      if (props.fingerprint.html.title) {
+        const query = `services.http.response.html_title:"${props.fingerprint.html.title}"`
+        q.push({ key: "Title", query: query, link: createLink(query) })
       }
 
-      return createLink(props.fingerprint.certificate.sha256);
-    });
-
-    const titleLink = computed(() => {
-      if (props.fingerprint.html.title === null) {
-        return undefined;
+      if (props.fingerprint.certificate) {
+        q.push({
+          key: "Certificate",
+          query: props.fingerprint.certificate.sha256,
+          link: createLink(props.fingerprint.certificate.sha256)
+        })
       }
 
-      const q = `services.http.response.html_title:"${props.fingerprint.html.title}"`;
-      return createLink(q);
-    });
+      ;(props.fingerprint.dns.a || []).forEach((record) => {
+        const query = `ip:${record.host}`
+        q.push({ key: "A", query: query, link: createLink(query) })
+      })
 
-    return { htmlLink, certificateLink, titleLink, aLinks };
-  },
-});
+      return q
+    })
+
+    return { queries }
+  }
+})
 </script>
