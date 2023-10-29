@@ -32,7 +32,7 @@ class Container:
 
 @future_safe
 async def get_url(url: str) -> Container:
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(verify=False) as client:
         response = await client.get(url, follow_redirects=True)
         return Container(response=response)
 
