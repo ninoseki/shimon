@@ -37,7 +37,8 @@ def get_favicon_urls_from_html(url: str, html: str) -> list[str]:
     link_tags = set()
     for rel in LINK_RELS:
         for link_tag in soup.find_all(
-            "link", attrs={"rel": lambda r: r and r.lower() == rel, "href": True}
+            "link",
+            attrs={"rel": lambda r: r and r.lower() == rel, "href": True},  # noqa: B023
         ):
             link_tags.add(link_tag)
 
@@ -49,10 +50,7 @@ def get_favicon_urls_from_html(url: str, html: str) -> list[str]:
         if not href or href.startswith("data:image/"):
             continue
 
-        if is_absolute(href):
-            url_parsed = href
-        else:
-            url_parsed = urljoin(url, href)
+        url_parsed = href if is_absolute(href) else urljoin(url, href)
 
         # repair '//cdn.network.com/favicon.png' or `icon.png?v2`
         scheme = urlparse(url).scheme

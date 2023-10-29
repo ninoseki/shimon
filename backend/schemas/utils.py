@@ -26,9 +26,9 @@ def get_mmh3(response: requests.Response) -> int:
     content_type = get_content_type(response)
     if "text/html" in content_type:
         return mmh3.hash(response.text)
-    else:
-        b64 = base64.encodebytes(response.content)
-        return mmh3.hash(b64)
+
+    b64 = base64.encodebytes(response.content)
+    return mmh3.hash(b64)
 
 
 def get_md5(response: requests.Response) -> str:

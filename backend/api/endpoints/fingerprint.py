@@ -40,9 +40,9 @@ async def calculate(url: str):
     try:
         response = get_response(url)
     except (requests.HTTPError, requests.ConnectionError) as e:
-        raise HTTPException(status_code=500, detail=f"Cannot get {url}: {e}")
+        raise HTTPException(status_code=500, detail=f"Cannot get {url}: {e}") from e
 
     try:
         return await Fingerprint.parse_response(response)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e)) from e
