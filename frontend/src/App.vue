@@ -3,7 +3,7 @@
     <Navbar></Navbar>
     <section class="section is-medium">
       <div class="container">
-        <h2 class="subtitle">Calculate a fingerprint of a website for OSINT search.</h2>
+        <h2 class="subtitle">URL fingerprinting made easy.</h2>
         <Calculator></Calculator>
       </div>
     </section>

@@ -1,11 +1,11 @@
 {
-  "name": "mmhdan",
-  "description": "Calculate fingerprints of a website for OSINT search",
+  "name": "shimon",
+  "description": "URL fingerprinting made easy",
   "keywords": [
     "OSINT"
   ],
-  "website": "https://github.com/ninoseki/mmhdan",
-  "repository": "https://github.com/ninoseki/mmhdan",
+  "website": "https://github.com/ninoseki/shimon",
+  "repository": "https://github.com/ninoseki/shimon",
   "success_url": "/",
   "stack": "container"
 }

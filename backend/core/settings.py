@@ -4,7 +4,7 @@ from starlette.config import Config
 
 config = Config(".env")
 
-PROJECT_NAME: str = config("PROJECT_NAME", default="mmhdan")
+PROJECT_NAME: str = config("PROJECT_NAME", default="shimon")
 
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 TESTING: bool = config("TESTING", cast=bool, default=False)

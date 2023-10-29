@@ -1,26 +1,23 @@
-# mmhdan
+# Shimon
 
-![Python CI](https://github.com/ninoseki/mmhdan/workflows/Python%20CI/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/ninoseki/mmhdan/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/mmhdan?branch=master)
+![Python CI](https://github.com/ninoseki/shimon/workflows/Python%20CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/ninoseki/shimon/badge.svg?branch=master)](https://coveralls.io/github/ninoseki/shimon?branch=master)
 
-Calculate fingerprints of a website for OSINT search.
+URL fingerprinting made easy.
 
 ## Requirements
 
 - Python 3.11
-- Node.js v18
+- Node.js v20
 
 ## Supported services
 
 - BinaryEdge
 - Censys
-- DomainBigData
-- DomainWatch
 - Onyphe
 - SecurityTrails
 - Shodan
 - SpyOnWeb
-- Spyse
 - urlscan.io
 - VirusTotal
 - ZoomEye
@@ -28,7 +25,7 @@ Calculate fingerprints of a website for OSINT search.
 ## Installation
 
 ```bash
-git clone https://github.com/ninoseki/mmhdan.git
+git clone https://github.com/ninoseki/shimon.git
 
 pip install -r requirements.txt
 poetry install
@@ -38,12 +35,6 @@ npm install
 npm run build
 ```
 
-## Dev server
-
-```bash
-uvicorn app.main:app
-```
-
 ## Demo
 
-- https://mmhdan.herokuapp.com/
+- https://shimon.herokuapp.com/

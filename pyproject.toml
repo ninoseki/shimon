@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mmhdan"
+name = "shimon"
 version = "0.1.0"
 description = ""
 authors = ["Manabu Niseki <manabu.niseki@gmail.com>"]
