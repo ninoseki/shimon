@@ -34,7 +34,3 @@ cd frontend
 npm install
 npm run build
 ```
-
-## Demo
-
-- https://shimon.herokuapp.com/
