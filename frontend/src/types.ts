@@ -1,3 +1,5 @@
+import { NullLiteral } from "typescript"
+
 export interface Resource {
   contentType: string
   md5: string
@@ -50,6 +52,10 @@ export interface HTML extends Resource {
   title: string | null
 }
 
+export interface TLS {
+  jarm: string
+}
+
 export interface Headers {
   [key: string]: string
 }
@@ -61,6 +67,7 @@ export interface Fingerprint {
   whois: Whois
   favicon: Resource | null
   certificate: Certificate | null
+  tls: TLS | null
   headers: Headers
 }
 

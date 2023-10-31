@@ -61,6 +61,11 @@ export default defineComponent({
         q.push({ key: "Certificate", query: query, link: createLink(query) })
       }
 
+      if (props.fingerprint.tls) {
+        const query = `ssl.jarm:${props.fingerprint.tls.jarm}`
+        q.push({ key: "JARM", query: query, link: createLink(query) })
+      }
+
       ;(props.fingerprint.dns.a || []).forEach((record) => {
         const query = `ip:${record.host}`
         q.push({ key: "A", query: query, link: createLink(query) })

@@ -59,6 +59,15 @@ export default defineComponent({
         })
       }
 
+      if (props.fingerprint.tls) {
+        const query = `services.jarm.fingerprint:"${props.fingerprint.tls.jarm}"`
+        q.push({
+          key: "JARM",
+          query: query,
+          link: createLink(query)
+        })
+      }
+
       ;(props.fingerprint.dns.a || []).forEach((record) => {
         const query = `ip:${record.host}`
         q.push({ key: "A", query: query, link: createLink(query) })
