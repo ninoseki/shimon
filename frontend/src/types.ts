@@ -1,5 +1,3 @@
-import { NullLiteral } from "typescript"
-
 export interface Resource {
   contentType: string
   md5: string
