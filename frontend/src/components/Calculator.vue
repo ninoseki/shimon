@@ -29,12 +29,13 @@
         <hr />
         <BinaryEdge :fingerprint="calculateTask.last.value"></BinaryEdge>
         <Censys :fingerprint="calculateTask.last.value"></Censys>
+        <Fofa :fingerprint="calculateTask.last.value"></Fofa>
         <Onyphe :fingerprint="calculateTask.last.value"></Onyphe>
+        <SecurityTrails :fingerprint="calculateTask.last.value"></SecurityTrails>
         <Shodan :fingerprint="calculateTask.last.value"></Shodan>
+        <SpyOnWeb :fingerprint="calculateTask.last.value"></SpyOnWeb>
         <Urlscan :fingerprint="calculateTask.last.value"></Urlscan>
         <VirusTotal :fingerprint="calculateTask.last.value"></VirusTotal>
-        <SecurityTrails :fingerprint="calculateTask.last.value"></SecurityTrails>
-        <SpyOnWeb :fingerprint="calculateTask.last.value"></SpyOnWeb>
         <ZoomEye :fingerprint="calculateTask.last.value"></ZoomEye>
       </div>
     </div>
@@ -51,6 +52,7 @@ import FingerprintComponent from "@/components/Fingerprint.vue"
 import Loading from "@/components/Loading.vue"
 import BinaryEdge from "@/components/services/BinaryEdge.vue"
 import Censys from "@/components/services/Censys.vue"
+import Fofa from "@/components/services/Fofa.vue"
 import Onyphe from "@/components/services/Onyphe.vue"
 import SecurityTrails from "@/components/services/SecurityTrails.vue"
 import Shodan from "@/components/services/Shodan.vue"
@@ -67,13 +69,14 @@ export default defineComponent({
     Censys,
     ErrorMessage,
     FingerprintComponent,
+    Fofa,
     Loading,
     Onyphe,
+    SecurityTrails,
     Shodan,
+    SpyOnWeb,
     Urlscan,
     VirusTotal,
-    SecurityTrails,
-    SpyOnWeb,
     ZoomEye
   },
   setup() {
