@@ -20,6 +20,7 @@ mmh3 = "^4.0"
 pyhumps = "^3.8.0"
 pyOpenSSL = "^23.3"
 returns = "^0.22"
+scapy = "^2.5.0"
 tldextract = "^5.0"
 uvicorn = { extras = ["standard"], version = "^0.23" }
 
