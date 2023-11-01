@@ -17,6 +17,7 @@
     "axios": "1.6.0",
     "bulma": "0.9.4",
     "email-regex": "5.0.0",
+    "js-base64": "^3.7.5",
     "qs": "6.11.2",
     "vue": "3.3.7",
     "vue-concurrency": "4.0.1",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.5.1",
     "@tsconfig/node20": "^20.1.2",
+    "@types/js-base64": "^3.3.1",
     "@types/jsdom": "^21.1.4",
     "@types/node": "^20.8.9",
     "@types/qs": "^6.9.9",
