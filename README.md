@@ -10,10 +10,11 @@ URL fingerprinting made easy.
 - Python 3.11
 - Node.js v20
 
-## Supported services
+## Supported Services For Pivoting
 
 - BinaryEdge
 - Censys
+- Fofa
 - Onyphe
 - SecurityTrails
 - Shodan
