@@ -6,6 +6,7 @@ from returns.functions import raise_exception
 from returns.future import FutureResultE, future_safe
 from returns.pipeline import flow
 from returns.pointfree import bind
+from returns.unsafe import unsafe_perform_io
 
 from backend import schemas
 
@@ -41,11 +42,7 @@ async def get_url(url: str) -> Container:
 
 @future_safe
 async def get_whois(container: Container) -> Container:
-    try:
-        container.whois = await Whois().call(container.response)
-    except Exception:
-        container.whois = schemas.Whois()
-
+    container.whois = await Whois().call(container.response)
     return container
 
 
@@ -103,7 +100,7 @@ async def get_tls(container: Container) -> Container:
 
 class Fingerprint(AbstractService):
     async def call(self, url: str) -> schemas.Fingerprint:
-        result: FutureResultE[Container] = flow(
+        f_result: FutureResultE[Container] = flow(
             url,
             get_url,
             bind(get_certificate),
@@ -114,9 +111,8 @@ class Fingerprint(AbstractService):
             bind(get_tracker),
             bind(get_whois),
         )
-        container = (
-            (await result.awaitable()).alt(raise_exception)._inner_value.unwrap()
-        )
+        result = (await f_result.awaitable()).alt(raise_exception).unwrap()
+        container = unsafe_perform_io(result)
         return schemas.Fingerprint(
             html=container.html,  # type: ignore
             dns=container.dns,  # type: ignore

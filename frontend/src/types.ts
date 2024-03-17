@@ -7,6 +7,8 @@ export interface Resource {
   url: string
 }
 
+export interface Favicon extends Resource {}
+
 export interface Certificate {
   sha256: string
   sha1: string
@@ -28,26 +30,26 @@ export interface TXT {
   ttl: number
 }
 export interface DNS {
-  a: A[] | null
-  aaaa: A[] | null
-  cname: CNAME[] | null
-  txt: TXT[] | null
+  a?: A[]
+  aaaa?: A[]
+  cname?: CNAME[]
+  txt?: TXT[]
 }
 
 export interface Tracker {
-  googleAdsenseId: string | null
-  googleAnalyticsId: string | null
+  googleAdsenseId?: string
+  googleAnalyticsId?: string
 }
 
 export interface Whois {
-  registrantEmail: string | null
-  registrantName: string | null
-  registrantOrganization: string | null
-  registrar: string | null
+  registrantEmail?: string
+  registrantName?: string
+  registrantOrganization?: string
+  registrar?: string
 }
 
 export interface HTML extends Resource {
-  title: string | null
+  title?: string
 }
 
 export interface TLS {
@@ -63,9 +65,9 @@ export interface Fingerprint {
   dns: DNS
   tracker: Tracker
   whois: Whois
-  favicon: Resource | null
-  certificate: Certificate | null
-  tls: TLS | null
+  favicon?: Favicon
+  certificate?: Certificate
+  tls?: TLS
   headers: Headers
 }
 
