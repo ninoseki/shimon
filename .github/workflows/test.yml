@@ -22,9 +22,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run tests
-        run: |
-          mkdir -p frontend/dist/assets
-          poetry run pytest --cov=app
+        run: poetry run pytest --cov=app
       - name: Coveralls
         env:
           COVERALLS_PARALLEL: true
