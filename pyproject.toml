@@ -20,14 +20,13 @@ loguru = "^0.7"
 mmh3 = "^4.1"
 pyhumps = "^3.8"
 pyOpenSSL = "^24.1"
-returns = "^0.22"
+returns = { extras = ["compatible-mypy"], version = "^0.22" }
 scapy = "^2.5"
 tldextract = "^5.1"
 uvicorn = { extras = ["standard"], version = "^0.28" }
 
 [tool.poetry.group.dev.dependencies]
 coveralls = "^3.3"
-mypy = "^1.9"
 pytest = "^8.1"
 pytest-cov = "^4.1"
 pytest-mock = "^3.12"

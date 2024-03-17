@@ -1,7 +1,11 @@
 <template>
-  <div class="tags has-addons are-medium" v-for="(query, index) in queries" :key="index">
-    <span class="tag is-dark">{{ query.key }}</span>
-    <a class="tag is-info" target="_blank" :href="query.link">{{ query.query }}</a>
+  <div class="field is-grouped is-grouped-multiline">
+    <div class="control" v-for="(query, index) in queries" :key="index">
+      <div class="tags are-medium has-addons">
+        <span class="tag is-dark">{{ query.key }}</span>
+        <a class="tag is-info" target="_blank" :href="query.link">{{ query.query }}</a>
+      </div>
+    </div>
   </div>
 </template>
 

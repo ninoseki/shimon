@@ -32,10 +32,25 @@ export default defineComponent({
       return `https://www.virustotal.com/gui/ip-address/${query}/detail`
     }
 
+    const createVTILink = (query: string): string => {
+      return `https://www.virustotal.com/gui/search/${query}/urls`
+    }
+
     const queries = computed<Query[]>(() => {
-      return (props.fingerprint.dns.a || []).map((record) => {
+      const q: Query[] = (props.fingerprint.dns.a || []).map((record) => {
         return { key: "A", query: record.host, link: createLink(record.host) }
       })
+
+      if (props.fingerprint.favicon) {
+        const query = `entity:url main_icon_md5:${props.fingerprint.favicon.md5}`
+        q.push({
+          key: "Favicon",
+          query: query,
+          link: createVTILink(query)
+        })
+      }
+
+      return q
     })
 
     return { queries }
