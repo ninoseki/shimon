@@ -91,9 +91,9 @@ async def get_fingerprint(res: httpx.Response) -> schemas.Fingerprint:
         certificate_result.value_or(None)  # type: ignore
     )  # type: ignore
     dns: schemas.DNS = unsafe_perform_io(dns_result.value_or(schemas.DNS()))  # type: ignore
-    favicon: schemas.Favicon = unsafe_perform_io(favicon_result.value_or(None))  # type: ignore
-    html: schemas.HTML = unsafe_perform_io(html_result.value_or(None))  # type: ignore
-    tls: schemas.TLS = unsafe_perform_io(tls_result.value_or(None))  # type: ignore
+    favicon: schemas.Favicon | None = unsafe_perform_io(favicon_result.value_or(None))  # type: ignore
+    html: schemas.HTML = unsafe_perform_io(html_result.alt(raise_exception).unwrap())  # type: ignore
+    tls: schemas.TLS | None = unsafe_perform_io(tls_result.value_or(None))  # type: ignore
     tracker: schemas.Tracker = unsafe_perform_io(
         tracker_result.value_or(schemas.Tracker())  # type: ignore
     )
