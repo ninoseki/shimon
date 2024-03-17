@@ -10,6 +10,8 @@ from pycares import (
     ares_query_cname_result,
     ares_query_txt_result,
 )
+from returns.future import future_safe
+from returns.unsafe import unsafe_perform_io
 
 from backend import schemas
 from backend.schemas.dns import AAAA, CNAME, TXT, A
@@ -20,17 +22,21 @@ from .abstract import AbstractService
 QUERY_TYPES = typing.Literal["A", "AAAA", "CNAME", "TXT"]
 
 
-async def query(name: str, query_type: QUERY_TYPES):
-    try:
-        resolver = aiodns.DNSResolver()
-        records = await resolver.query(name, query_type)
+@future_safe
+async def safe_query(
+    name: str, query_type: QUERY_TYPES, resolver: aiodns.DNSResolver | None = None
+) -> list[typing.Any]:
+    resolver = resolver or aiodns.DNSResolver()
+    records = await resolver.query(name, query_type)
 
-        if not isinstance(records, list):
-            records = [records]
+    if not isinstance(records, list):
+        records = [records]
 
-        return typing.cast(list[typing.Any], records)
-    except aiodns.error.DNSError:
-        return []
+    return typing.cast(list[typing.Any], records)
+
+
+async def query(name: str, query_type: QUERY_TYPES) -> list[typing.Any]:
+    return unsafe_perform_io((await safe_query(name, query_type)).value_or([]))
 
 
 async def query_a_records(name: str) -> list[A]:
