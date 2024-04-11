@@ -1,39 +1,35 @@
-<template>
-  <article class="message is-warning">
-    <div class="message-header">
-      <p>Warning</p>
-    </div>
-    <div class="message-body">
-      <div v-if="error?.detail">
-        <VueJsonPretty :data="anyError"></VueJsonPretty>
-      </div>
-      <div v-else>Something went wrong...</div>
-    </div>
-  </article>
-</template>
-
-<script lang="ts">
+<script setup lang="ts">
 import "vue-json-pretty/lib/styles.css"
 
-import { computed, defineComponent, type PropType } from "vue"
+import { AxiosError } from "axios"
+import { computed } from "vue"
 import VueJsonPretty from "vue-json-pretty"
 
-import type { ErrorData } from "@/types"
+import type { ErrorDataType } from "@/types"
 
-export default defineComponent({
-  name: "ErrorMessage",
-  props: {
-    error: {
-      type: Object as PropType<ErrorData>,
-      required: false
-    }
-  },
-  components: { VueJsonPretty },
-  setup(props) {
-    const anyError = computed(() => {
-      return props.error as any
-    })
-    return { anyError }
+const props = defineProps({
+  error: {
+    type: AxiosError,
+    required: true
   }
 })
+
+const data = computed<ErrorDataType | undefined>(() => {
+  if (props.error.response) {
+    return props.error.response?.data as ErrorDataType
+  }
+  return undefined
+})
 </script>
+
+<template>
+  <div class="notification is-danger is-light">
+    <div v-if="data?.detail">
+      <div v-if="typeof data.detail === 'string'">
+        {{ data.detail }}
+      </div>
+      <VueJsonPretty :data="data.detail" v-else />
+    </div>
+    <p v-else>{{ error }}</p>
+  </div>
+</template>
