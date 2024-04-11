@@ -1,3 +1,18 @@
+import { z } from "zod"
+
+export const ValidationErrorSchema = z.object({
+  loc: z.array(z.string()),
+  msg: z.string(),
+  type: z.string()
+})
+
+export const ErrorDataSchema = z.object({
+  detail: z.union([z.string(), z.array(ValidationErrorSchema)])
+})
+
+export type ErrorDataType = z.infer<typeof ErrorDataSchema>
+
+// TODO: replace them with Zod
 export interface Resource {
   contentType: string
   md5: string
@@ -69,10 +84,6 @@ export interface Fingerprint {
   certificate?: Certificate
   tls?: TLS
   headers: Headers
-}
-
-export interface ErrorData {
-  detail: string
 }
 
 export interface Query {
