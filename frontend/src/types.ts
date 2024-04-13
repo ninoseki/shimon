@@ -12,6 +12,12 @@ export const ErrorDataSchema = z.object({
 
 export type ErrorDataType = z.infer<typeof ErrorDataSchema>
 
+export const CountSchema = z.object({
+  count: z.number()
+})
+
+export type CountType = z.infer<typeof CountSchema>
+
 // TODO: replace them with Zod
 export interface Resource {
   contentType: string
