@@ -55,12 +55,12 @@ const calculate = async () => {
   <div v-if="calculateTask.last?.value">
     <FingerprintComponent :fingerprint="calculateTask.last.value" />
     <hr />
-    <BinaryEdge :fingerprint="calculateTask.last.value" />
+    <Shodan :fingerprint="calculateTask.last.value" />
     <Censys :fingerprint="calculateTask.last.value" />
+    <BinaryEdge :fingerprint="calculateTask.last.value" />
     <Fofa :fingerprint="calculateTask.last.value" />
     <Onyphe :fingerprint="calculateTask.last.value" />
     <SecurityTrails :fingerprint="calculateTask.last.value" />
-    <Shodan :fingerprint="calculateTask.last.value" />
     <SpyOnWeb :fingerprint="calculateTask.last.value" />
     <Urlscan :fingerprint="calculateTask.last.value" />
     <VirusTotal :fingerprint="calculateTask.last.value" />

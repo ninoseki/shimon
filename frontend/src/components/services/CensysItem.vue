@@ -13,7 +13,7 @@ const props = defineProps({
   }
 })
 
-const isHidden = ref(true)
+const isHidden = ref(false)
 
 const toggleIsHidden = useToggle(isHidden)
 
@@ -79,6 +79,6 @@ const queries = computed<Query[]>(() => {
         <font-awesome-icon icon="caret-up" v-else />
       </span>
     </h4>
-    <QueryTags :queries="queries" v-if="!isHidden" />
+    <QueryTags :queries="queries" :service="'censys'" v-if="!isHidden" />
   </div>
 </template>

@@ -1,4 +1,5 @@
 from .certificate import Certificate  # noqa: F401
+from .counters import Censys, Shodan  # noqa: F401
 from .dns import DNS  # noqa: F401
 from .favicon import Favicon  # noqa: F401
 from .fingerprint import Fingerprint  # noqa: F401
